@@ -1,0 +1,604 @@
+{
+  "Uuid": "7e9dad5a-7cb7-4d70-808e-09de12419ad2",
+  "IsCustomNode": false,
+  "Description": null,
+  "Name": "Warm_floor_2.2",
+  "ElementResolver": {
+    "ResolutionMap": {
+      "Point": {
+        "Key": "Autodesk.DesignScript.Geometry.Point",
+        "Value": "ProtoGeometry.dll"
+      }
+    }
+  },
+  "Inputs": [],
+  "Outputs": [],
+  "Nodes": [
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 1000.0,
+      "MinimumValue": 0.0,
+      "StepValue": 1.0,
+      "InputValue": 300.0,
+      "Id": "b414edc66bb547349c33ea24fd7f01d2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "034259f881fe4aa6b943182121af765d",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Р РµРіСѓР»СЏС‚РѕСЂ, СЃРѕР·РґР°СЋС‰РёР№ С‡РёСЃР»РѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "03003a6b-a314-4f29-9e1d-ae17c4b1cf36-003ed944"
+      ],
+      "Id": "c08c0166a79749d9bb02fe11c7439c91",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "5239e02de94a45db8fec67c3410bfcd6",
+          "Name": "Element",
+          "Description": "Р’С‹Р±СЂР°РЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": false,
+      "Id": "7fe8fe48eab143f6b9880aa2fc680fd3",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "197d0f9b9dbd45e29cb6bf2bc4e95187",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Р’С‹Р±РѕСЂ РјРµР¶РґСѓ Р·РЅР°С‡РµРЅРёСЏРјРё true Рё false."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "03003a6b-a314-4f29-9e1d-ae17c4b1cf36-003ed946"
+      ],
+      "Id": "c811cd6d720e4a72bade5bd5e05efaeb",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "8df78762b4bb4243ac9c0aeb73e6d535",
+          "Name": "Element",
+          "Description": "Р’С‹Р±СЂР°РЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Watch, CoreNodeModels",
+      "NodeType": "ExtensionNode",
+      "Id": "780eeaff00724c5b9016bd9457dc7ee7",
+      "Inputs": [
+        {
+          "Id": "5041019142cc41f290b14e2e3605c29c",
+          "Name": "",
+          "Description": "РЈР·РµР» РґР»СЏ РѕС†РµРЅРєРё.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "de4dd71b4dc243beafef69a779807be4",
+          "Name": "",
+          "Description": "РџСЂРѕСЃРјРѕС‚СЂ СЃРѕРґРµСЂР¶РёРјРѕРіРѕ.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Р’РёР·СѓР°Р»РёР·Р°С†РёСЏ РІС…РѕРґРЅРѕРіРѕ СЌР»РµРјРµРЅС‚Р° СѓР·Р»Р°."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.DoubleSlider, CoreNodeModels",
+      "NodeType": "NumberInputNode",
+      "NumberType": "Double",
+      "MaximumValue": 1000.0,
+      "MinimumValue": 100.0,
+      "StepValue": 0.001,
+      "InputValue": 200.0,
+      "Id": "cc2ab6417e8d49eba7612aefbdc7c687",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "383bf0417a9546dcab49697e14ec94f9",
+          "Name": "",
+          "Description": "Double",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Р РµРіСѓР»СЏС‚РѕСЂ, СЃРѕР·РґР°СЋС‰РёР№ С‡РёСЃР»РѕРІС‹Рµ Р·РЅР°С‡РµРЅРёСЏ."
+    },
+    {
+      "ConcreteType": "CoreNodeModels.Input.BoolSelector, CoreNodeModels",
+      "NodeType": "BooleanInputNode",
+      "InputValue": true,
+      "Id": "99ffaefc4e5c485d91c5062fda059ab2",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "d45ed7ce63594f1e80d326bf60f63172",
+          "Name": "",
+          "Description": "Boolean",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Р’С‹Р±РѕСЂ РјРµР¶РґСѓ Р·РЅР°С‡РµРЅРёСЏРјРё true Рё false."
+    },
+    {
+      "ConcreteType": "Dynamo.Nodes.DSModelElementSelection, DSRevitNodesUI",
+      "NodeType": "ExtensionNode",
+      "InstanceId": [
+        "416591e6-d6ed-4f33-a0ab-651e96d4b15b-003e2681"
+      ],
+      "Id": "2ffe469ad5c34fe1b5ad7aab0955f9f7",
+      "Inputs": [],
+      "Outputs": [
+        {
+          "Id": "fb0608cce86241579956f3275e184a1b",
+          "Name": "Element",
+          "Description": "Р’С‹Р±СЂР°РЅРЅС‹Рµ СЌР»РµРјРµРЅС‚С‹.",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled"
+    },
+    {
+      "ConcreteType": "PythonNodeModels.PythonNode, PythonNodeModels",
+      "NodeType": "PythonScriptNode",
+      "Code": "if True: #\r\n\r\n\timport clr\r\n\r\n\tclr.AddReference('ProtoGeometry')\r\n\timport Autodesk.DesignScript.Geometry as DG\r\n\r\n\tclr.AddReference('DSCoreNodes')\r\n\timport DSCore as DS\r\n\r\n\tclr.AddReference(\"RevitServices\")\r\n\tfrom RevitServices.Persistence import DocumentManager\r\n\tfrom RevitServices.Transactions import TransactionManager\r\n\tdoc =  DocumentManager.Instance.CurrentDBDocument\r\n\r\n\tclr.AddReference(\"RevitAPI\")\r\n\tfrom Autodesk.Revit.DB import *\r\n\tfrom Autodesk.Revit.DB.Plumbing import *\r\n\tfrom Autodesk.Revit.DB.Mechanical import *\r\n\tfrom Autodesk.Revit.DB.Structure import *\r\n\r\n\tclr.AddReference(\"RevitNodes\")\r\n\timport Revit.Elements as DR\r\n\timport Revit\r\n\tclr.ImportExtensions(Revit.Elements)\r\n\tclr.ImportExtensions(Revit.GeometryConversion)\r\n\r\n\timport math\r\n\timport time\r\n\r\n\r\n\tstart_time = time.time()\r\n\tfrom System.Collections.Generic import List as CList\r\n\tfrom System.Collections.Generic import IList\r\n\r\ndef ClosestConnectors(mepCurve1Connectors, mepCurve2Connectors):\r\n\r\n\tminDist = 9999999\r\n\tclosestConnectors = None\r\n\tfor connector1 in mepCurve1Connectors:\r\n\t\tfor connector2 in mepCurve2Connectors:\r\n\t\t\tdist =  connector1.Origin.DistanceTo(connector2.Origin)\r\n\t\t\tif dist < minDist:\r\n\t\t\t\tminDist = dist\r\n\t\t\t\tclosestConnectors = [connector1, connector2]\r\n\treturn closestConnectors\r\n\r\n\r\n\r\n\r\ndef RebuildLoop(curves):\r\n\t\r\n\t\r\n\tdef Compare(curve1,curve2,maxAngle):\t\r\n\t\r\n\t\tv1 = curve1.ComputeDerivatives(1,True).BasisX\r\n\t\tv2= curve2.ComputeDerivatives(0,True).BasisX\r\n\t\tp11 = curve1.Evaluate(0, True)\r\n\t\tpmid = curve1.Evaluate(0.5, True)\r\n\t\tp12 = curve1.Evaluate(1, True)\r\n\t\tp21 = curve2.Evaluate(0, True)\r\n\t\tp22 = curve2.Evaluate(1, True)\r\n\t\ttype1 = curve1.GetType()\r\n\t\ttype2 = curve2.GetType()\r\n\t\tangle = math.degrees(v1.AngleOnPlaneTo(v2,XYZ(0,0,1)))\r\n\t\tdist = p12.DistanceTo(p21) \r\n\t\tif type1 == type2 and  (angle <= maxAngle or angle >= 360 - maxAngle)  and dist < 0.1:\r\n\t\t\tif type == Arc:\r\n\t\t\t\treturn Arc.Create(p11,p22,pmid)\t\r\n\t\t\telse: return Line.CreateBound(p11,p22)\t\r\n\t\telse:\r\n\t\t\treturn None\r\n\ti=0\r\n\t\r\n\twhile i< len(curves)-1:\r\n\t\tcom = Compare(curves[i],curves[i+1],1)\r\n\t\tif com is None:\r\n\t\t\ti+=1\r\n\t\telse:\r\n\t\t\tdel curves[i+1]\r\n\t\t\tcurves[i] = com\t\t\t\t\r\n\t\t\t\r\n\t\t\t\t\r\n\t#com = Compare(curves[-1],curves[0],10)\t\t\t\r\n\t#if com is not None:\r\n\t#\tdel curves[-1]\r\n\t#\tcurves[0] = com\r\n\t\t\t\r\n\treturn curves\r\n\t\t\t\r\n\r\n\r\n\r\ndef SortCurves(curves):\r\n\r\n\tcurves = [c.ToProtoType() for c in curves]\r\n\tpolyCurve = DG.PolyCurve.ByJoinedCurves(curves,0.1)\r\n\tbox = polyCurve.BoundingBox\r\n\tminp, maxp = box.MinPoint, box.MaxPoint\r\n\tp1 = DG.Point.ByCoordinates(minp.X,(maxp.Y + minp.Y)/2,minp.Z)\r\n\tp2 = polyCurve.ClosestPointTo(p1)\r\n\tparameter = polyCurve.ParameterAtPoint(p2)\r\n\ttangent = polyCurve.TangentAtParameter(parameter)\r\n\tif tangent.Y > 0: polyCurve = polyCurve.Reverse()\r\n\treturn [c.ToRevitType() for c in polyCurve.Explode()]\r\n\r\ndef CreateOffsetCurves(curves,offset,baseZ,start):\r\n\r\n\r\n\t# РџСЂРѕРІРµСЂРёС‚СЊ С‡С‚РѕР±С‹ РЅРµ Р±С‹Р»Рѕ РІРёС‚СЂР°Р¶РµР№\r\n\r\n\troofTypes = list(FilteredElementCollector(doc).OfClass(RoofType))\r\n\troofType = [rt for rt in roofTypes if rt.GetCompoundStructure() is not None][0]\r\n\r\n\r\n\tlevel = list(FilteredElementCollector(doc).OfClass(Level).ToElements())[0]\r\n\r\n\tcurveArray = CurveArray()\r\n\tmodelCurveArray= clr.StrongBox[ModelCurveArray](ModelCurveArray())\r\n\tfor c in curves:\r\n\t\tcurveArray.Append(c)\r\n\troof = doc.Create.NewFootPrintRoof(curveArray,level,roofType,modelCurveArray)\r\n\r\n\tfor c in list(modelCurveArray.Value):\r\n\t\tc.get_Parameter(BuiltInParameter.ROOF_CURVE_IS_SLOPE_DEFINING).Set(1)\r\n\t\tc.get_Parameter(BuiltInParameter.ROOF_SLOPE).Set(1)\r\n\r\n\tdoc.Regenerate()\r\n\r\n\tcurveGroups = []\r\n\ttry:\r\n\r\n\t\topt = Options()\r\n\t\tsolid = list(roof.get_Geometry(opt))[0]\r\n\t\tupFaces = [f for f in solid.Faces if f.ComputeNormal(UV(0,0)).Z > 0.05]\r\n\t\tminz = min([f.Evaluate(f.GetBoundingBox().Min).Z for f in upFaces ])\r\n\t\tmaxz = max([f.Evaluate(f.GetBoundingBox().Max).Z for f in upFaces ])\r\n\r\n\t\tdef SplitSolid(solid,zz,baseZ):\r\n\r\n\t\t\tplane = Plane.CreateByNormalAndOrigin(XYZ(0,0,-1),XYZ(0,0,zz))\r\n\t\t\tfaces = BooleanOperationsUtils.CutWithHalfSpace(solid,plane).Faces\r\n\r\n\t\t\tfor face in faces:\r\n\t\t\t\tif face.FaceNormal.AngleTo(XYZ(0,0,1)) < math.radians(3):\r\n\t\t\t\t\tloops = list(face.GetEdgesAsCurveLoops())\r\n\t\t\t\t\tfor loop in loops:\r\n\t\t\t\t\t\tfor face in upFaces:\r\n\t\t\t\t\t\t\tpoint = list(loop)[0].Evaluate(0.5,True)\r\n\t\t\t\t\t\t\tres = face.Project(point)\r\n\t\t\t\t\t\t\tif res is not None and res.Distance < 0.01:\r\n\r\n\r\n\t\t\t\t\t\t\t\ttr = Transform.CreateTranslation(XYZ(0, 0, - zz + baseZ))\r\n\t\t\t\t\t\t\t\ttranslatedLoop = [l.CreateTransformed(tr) for l in loop]\r\n\t\t\t\t\t\t\t\treturn translatedLoop\r\n\r\n\r\n\t\tzz = minz + offset/2\r\n\t\twhile zz <= maxz:\r\n\t\t\tres = SplitSolid(solid,zz,baseZ)\r\n\t\t\tcurveGroups.append(res)\r\n\t\t\tzz += offset\r\n\r\n\texcept: pass\r\n\r\n\tdoc.Delete(roof.Id)\r\n\treturn curveGroups\r\n\r\ndef Shot(point,vector,curves):\r\n\r\n\tray = Line.CreateBound(point, point.Add(vector.Multiply(1000)))\r\n\t\r\n\tdata = []\r\n\t\r\n\tfor i,curve in enumerate(curves):\r\n\t\r\n\t\tstartPoint = curve.Evaluate(0,True)\r\n\t\tv1 = startPoint.Subtract(point).Normalize()\r\n\t\tangle = vector.AngleTo(v1)\r\n\t\t\r\n\t\tif angle < math.radians(1):# or angle > math.radians(360-3):\r\n\t\t\r\n\t\t\tparameterOnRay = ray.Project(startPoint).Parameter\r\n\t\t\tparameterOnCurve = 0\r\n\t\t\tdata.append([ i, startPoint, parameterOnCurve, parameterOnRay])\r\n\t\t\t\r\n\t\telse: \r\n\t\t\t#continue\r\n\t\t\tresultList = clr.StrongBox[IList[ClosestPointsPairBetweenTwoCurves]](CList[ClosestPointsPairBetweenTwoCurves]())\r\n\t\t\ttry: closestPoint = ray.ComputeClosestPoints(curve, True,True,True, resultList)\r\n\t\t\texcept: continue\t\r\n\t\t\t\r\n\t\t\tresultList = list(resultList.Value)\r\n\t\t\tif resultList:\r\n\t\t\t\tres = resultList[0]\r\n\t\t\t\tpoint1 = res.XYZPointOnFirstCurve\r\n\t\t\t\tpoint2 = res.XYZPointOnSecondCurve\r\n\t\t\t\t\r\n\t\t\t\tparameterOnRay = res.ParameterOnFirstCurve\r\n\t\t\t\tparameterOnCurve = res.ParameterOnSecondCurve\r\n\t\t\t\t\r\n\t\t\t\tif point1.DistanceTo(point2) < 0.001 and parameterOnCurve < curve.Length - 0.01:\r\n\t\t\t\t\tdata.append([i, point2, parameterOnCurve, parameterOnRay])\r\n\t\t\telse: pass\r\n\r\n\t\t\t#return shiftCurves, point2, parameter\r\n\t#return data\t\t\r\n\tif data:\r\n\t\r\n\t\tdata.sort(key = lambda x: x[-1])\r\n\t\tdd = data[0]\r\n\t\tindex = dd[0]\r\n\t\tshiftCurves =  curves[index:] + curves[:index]\r\n\r\n\t\treturn [shiftCurves,dd[1],dd[2]]\r\n\telse:\r\n\t\treturn None\r\n\r\ndef Champfer(line1,line2,x):\r\n\r\n\tangle = line1.Direction.AngleTo(line2.Direction.Negate())\r\n\tif angle < math.pi/2-0.05:\r\n\t\ty = math.fabs((x/2)/math.sin(angle/2))\r\n\t\tif y > 0 and y < line1.Length/2 and y < line2.Length/2:\r\n\t\t\tp1 = line1.Evaluate(0,True)\r\n\t\t\tp2 = line1.Evaluate(line1.Length-y,False)\r\n\t\t\tp3 = line2.Evaluate(y,False)\r\n\t\t\tp4 = line2.Evaluate(1,True)\r\n\t\t\tline3 = Line.CreateBound(p1,p2)\r\n\t\t\tline4 = Line.CreateBound(p2,p3)\r\n\t\t\tline5 = Line.CreateBound(p3,p4)\r\n\t\t\treturn line3,line4,line5\r\n\r\n\telse: return None\r\n\r\ndef maincode():\r\n\r\n# Р’С…РѕРґРЅС‹Рµ РґР°РЅРЅС‹Рµ\r\n\r\n\tonlyTest = IN[0]\r\n\r\n\tregion = UnwrapElement(IN[1])\r\n\r\n\t#return boundaris\r\n\r\n\tstartPipe = UnwrapElement(IN[3])\r\n\tendPipe = UnwrapElement(IN[2])\r\n\toffset = IN[4]*2/304.8\r\n\r\n\tchampfer = IN[5]/304.8\r\n\treverse = IN[6]\r\n\t#inputParameter = IN[7]\r\n\r\n\r\n\r\n\r\n# РћР±СЂР°Р±РѕС‚РєР° РІС…РѕРґРЅС‹С… РґР°РЅРЅС‹С…\r\n\r\n\tif region.GetType() != FilledRegion: return \"Р’С‹Р±СЂР°РЅРЅС‹Р№ РѕР±СЉРµРєС‚ РЅРµ СЏРІР»СЏРµС‚СЃСЏ РѕР±Р»Р°СЃС‚СЊСЋ Р·Р°Р»РёРІРєРё.\"\r\n\tcurves = list(UnwrapElement(IN[1]).GetBoundaries())\r\n\tif len(curves) > 1: return \"РќР°Р»РёС‡РёРµ РґРІСѓС… РєРѕРЅС‚СѓСЂРѕРІ Сѓ СЂРµРіРёРѕРЅР° РЅРµ РґРѕРїСѓСЃРєР°РµС‚СЃСЏ/ РЈР±РµСЂРёС‚Рµ РІРЅСѓС‚СЂРµРЅРЅРёР№ РєРѕРЅС‚СѓСЂ Сѓ РІС‹Р±СЂР°РЅРЅРѕР№ РѕР±Р»Р°СЃС‚Рё\"\r\n\telse: curves = curves[0]\r\n\r\n\r\n\tstart = offset\r\n\tif offset < 100/304.8: return \"РЎР»РёС€РєРѕРј РјР°Р»РµРЅСЊРєРёР№ С€Р°Рі РјРµР¶РґСѓ С‚СЂСѓР±Р°РјРё\"\r\n\tif champfer < 100/304.8: return \"РЎР»РёС€РєРѕРј РјР°Р»РµРЅСЊРєР°СЏ С„Р°СЃРєР°\"\r\n\tif startPipe.GetType() != Pipe: return \"Р’С‹Р±СЂР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ РєРѕРЅС‚СѓСЂР° РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‚СЂСѓР±РѕР№. Р’С‹Р±РµСЂРёС‚Рµ Р·Р°РЅРѕРІРѕ\"\r\n\tif endPipe.GetType() != Pipe: return \"Р’С‹Р±СЂР°РЅРЅС‹Р№ СЌР»РµРјРµРЅС‚ РІРЅРµС€РЅРµРіРѕ РєРѕРЅС‚СѓСЂР° РЅРµ СЏРІР»СЏРµС‚СЃСЏ С‚СЂСѓР±РѕР№. Р’С‹Р±РµСЂРёС‚Рµ Р·Р°РЅРѕРІРѕ\"\r\n\r\n\r\n\tlevel = startPipe.ReferenceLevel\r\n\toffsetFromLevel = startPipe.LevelOffset\r\n\tbaseZ = level.Elevation + offsetFromLevel\r\n\r\n\r\n\tpipeType = startPipe.PipeType\r\n\tpipeDiameter = startPipe.get_Parameter(BuiltInParameter.RBS_PIPE_DIAMETER_PARAM).AsDouble()\r\n\tstartPipeSystemType = doc.GetElement(startPipe.MEPSystem.GetTypeId())\r\n\tendPipeSystemType = doc.GetElement(endPipe.MEPSystem.GetTypeId())\r\n\tsystemTypes = [startPipeSystemType,endPipeSystemType]\r\n\r\n\r\n# РЎРѕСЂС‚РёСЂСѓРµРј, Р Р°Р·РІРѕСЂР°С‡РёРІР°РµРј Рё РїСЂРѕРµС†РёСЂСѓРµРј РєСЂРёРІС‹Рµ РЅР° РЅСѓР¶РЅСѓСЋ РїР»РѕСЃРєРѕСЃС‚СЊ\r\n\r\n\ttry:\r\n\t\tcurves = SortCurves(curves)\r\n\t\tcg = CreateOffsetCurves(curves, offset, baseZ, start)\r\n\texcept:\r\n\t\treturn \"Р’ РІС‹Р±СЂР°РЅРЅРѕРј РєРѕРЅС‚СѓСЂРµ РѕС€РёР±РєРё. РЎРєРѕСЂРµРµ РІСЃРµРіРѕ РѕРЅ СЂР°Р·РѕРјРєРЅСѓС‚, Р»РёР±Рѕ РІС‹ РІС‹Р±СЂР°Р»Рё РґРІР° РєРѕРЅС‚СѓСЂР°\"\r\n\r\n# РС‰РµРј СЃС‚Р°СЂС‚РѕРІСѓСЋ С‚РѕС‡РєСѓ (РїРѕС‚РѕРј СЌС‚РѕРіРѕ РЅРµ Р±СѓРґРµС‚)\r\n\r\n\ti = 0\r\n\r\n\tvector = XYZ(0,0,1)\r\n\r\n\tdyncurves = [c.ToProtoType() for c in cg[0]]\r\n\tpolyCurve = DG.PolyCurve.ByJoinedCurves(dyncurves,0.1)\r\n\t#startPoint = polyCurve.PointAtParameter(inputParameter).ToXyz()\r\n\tstartPoint = polyCurve.ClosestPointTo(startPipe.Location.Curve.ToProtoType()).ToXyz()\r\n\r\n\tdistance = polyCurve.DistanceTo(startPipe.Location.Curve.ToProtoType())\r\n\tif distance - offset > 5000: return distance,\"РџРѕРґРЅРµСЃРёС‚Рµ РІС…РѕРґРЅСѓСЋ С‚СЂСѓР±Сѓ Р±Р»РёР¶Рµ Рє РєРѕРЅС‚СѓСЂСѓ\",polyCurve.ClosestPointTo(startPipe.Location.Curve.ToProtoType())\r\n\r\n# Р Р°Р·РІРѕСЂРѕС‚\r\n\r\n\tif reverse:\r\n\t\tfor i in range(len(cg)):\r\n\t\t\tcg[i].reverse()\r\n\t\t\tfor j in range(len(cg[i])):\r\n\t\t\t\tcg[i][j] = Line.CreateBound(cg[i][j].Evaluate(1,True),cg[i][j].Evaluate(0,True))\r\n\r\n\r\n\r\n# РћСЃРЅРѕРІРЅРѕР№ Р°Р»РіРѕСЂС‚Рј\r\n\r\n\t##a = [1,2,3,4]\r\n\t#return a[:5]\r\n\r\n\t#return [[c.ToProtoType().ExtendEnd(100) for c in g] for g in cg]\r\n\r\n\treport = []\r\n\tpoints = []\r\n\r\n\tfor i in range(len(cg)):\r\n\r\n\t\tresult = Shot(startPoint, vector , cg[i] )\r\n\t\t#return result\r\n\t\tif result is not None and startPoint.DistanceTo(result[1]) <= 5*offset:\r\n\t\t\tcg[i], shotPoint, parameter = result[0], result[1], result[2]\r\n\r\n\t\telse:\r\n\t\t\tif i > 0:\r\n\t\t\t\ttry:\r\n\t\t\t\t\tpoly = polyCurve.ByJoinedCurves([c.ToProtoType() for c in cg[i]],0.1)\r\n\t\t\t\t\tclosestPoint1 = poly.ClosestPointTo(startPoint.ToPoint()).ToXyz()\r\n\t\t\t\t\t\r\n\t\t\t\t\tminDist = 999999\r\n\t\t\t\t\tindex = 0\r\n\t\t\t\t\tfor j,curve in enumerate(cg[i-1]):\r\n\t\t\t\t\t\tres = curve.Project(closestPoint1)\r\n\t\t\t\t\t\tdistance = round(res.Distance/10) # РћРєСЂСѓРіР»СЏРµРј\r\n\t\t\t\t\t\tif distance <= minDist:\r\n\t\t\t\t\t\t\tminDist = distance\r\n\t\t\t\t\t\t\tclosestPoint2 = res.XYZPoint\r\n\t\t\t\t\t\t\tindex = j\r\n\t\t\t\t\r\n\t\t\t\t\t\t\t\t\t\t\r\n\t\t\t\t\tcg[i-1] = cg[i-1][:index + 1]\r\n\t\t\t\t\tcg[i-1][-1] = Line.CreateBound(cg[i-1][-1].Evaluate(0,True),closestPoint2)\r\n\t\t\t\t\tvector = closestPoint1.Subtract(closestPoint2).Normalize()\r\n\t\t\t\t\tresult = Shot(closestPoint2, vector , cg[i] )\r\n\t\t\t\t\t\r\n\t\t\t\t\tif result is not None:\r\n\t\t\t\t\t\t\r\n\t\t\t\t\t\tcg[i], shotPoint, parameter = result[0], result[1], result[2]\r\n\t\t\t\t\t\treport.append([shotPoint.ToPoint(),closestPoint1.ToPoint(),closestPoint2.ToPoint()])\r\n\t\t\t\t\t\t#return report\r\n\t\t\t\texcept: \r\n\t\t\t\t\tbreak\r\n\t\t\t\t\t#report.pop()\r\n\t\t\t\t\treport.append([shotPoint.ToPoint(),closestPoint1.ToPoint(),closestPoint2.ToPoint()])#,cg[i-1][-1].ToProtoType()])\r\n\t\t\t\t\t#break#return report\r\n\t\t\t\t\t#return report\r\n\t\t\t\t\t\r\n\t\t\telse: break\r\n\r\n\t\tv1,v2,v3 = cg[i][-1].Direction, cg[i][0].Direction, cg[i][1].Direction\r\n\r\n\t\tk = -1 if reverse else 1\r\n\r\n\t\tangle1 = v1.AngleOnPlaneTo(v2,XYZ(0,0,1*k))\r\n\t\tangle2 = v2.AngleOnPlaneTo(v3,XYZ(0,0,1*k))\r\n\r\n\t\tif angle1 < math.pi and angle2!= 0:\r\n\t\t\tleftOffset = offset/math.sin(angle1)\r\n\t\telse:\r\n\t\t\tleftOffset = offset \r\n\r\n\t\tif angle2 < math.pi and angle2!= 0:\r\n\t\t\trightOffset =  offset/math.sin(angle2)\r\n\t\telse:\r\n\t\t\trightOffset = offset\r\n\r\n\r\n# Р•СЃР»Рё С‚РѕС‡РєР° РІ РЅР°С‡Р°Р»Рµ РїСЂСЏРјРѕР№\r\n\t\tvector = XYZ(0,0,1)\r\n\t\tmet = None\r\n\t\ttry:\r\n\t\t\t\r\n\t\t\tif parameter < 2*leftOffset:\r\n\t\t\t\r\n\t\t\t\tmet = 1\r\n\t\t\t\tcg[i][0] = Line.CreateBound(shotPoint, cg[i][0].Evaluate(1,True))\r\n\t\t\t\tparameter2 = cg[i][-1].Length - leftOffset\r\n\t\t\t\t\r\n\t\t\t\tif parameter2 > 0:\r\n\t\t\t\t\tcg[i][-1] = Line.CreateBound(cg[i][-1].Evaluate(0,True), cg[i][-1].Evaluate(parameter2,False))\r\n\t\t\t\telse:\r\n\t\t\t\t\tcg[i].pop()\t\r\n\t\t\t\t\t\t\r\n\t\t\t\tif angle1 < math.pi:\t\t\r\n\t\t\t\t\tvector = cg[i][0].Direction.Multiply(0.5)\r\n\t\t\t\telse:\r\n\t\t\t\t\tvector = cg[i][0].Direction.Multiply(-0.5)\r\n\t\t\t\t\r\n\t\t\t\t\t#met = 2\r\n\t\t\t\t\t#cg[i][0] = Line.CreateBound(shotPoint, cg[i][0].Evaluate(1,True))\r\n\t\t\t\t\t#parameter2 = cg[i][-1].Length - leftOffset\r\n\t\t\t\t\t#if parameter2 > 0:\r\n\t\t\t\t\t\r\n\t\t\t\t\t#\tcg[i][-1] = Line.CreateBound(cg[i][-1].Evaluate(0,True), cg[i][-1].Evaluate(parameter2,False))\r\n\t\t\t\t\t#else:\r\n\t\t\t\t\t#\tcg[i].pop()\t\t\t\t\t\t\t\r\n\t\t\t\t\t\r\n\t\r\n\t\r\n# Р•СЃР»Рё РїРѕСЃРµСЂРµРґРёРЅРµ\r\n\t\r\n\t\t\telif parameter <= cg[i][0].Length - rightOffset :\r\n\t\t\t\tmet = 3\r\n\t\t\t\tif angle1 < math.pi:\r\n\t\t\t\t\tk = -1\r\n\t\t\t\telse:\r\n\t\t\t\t\tk = 1\r\n\t\r\n\t\t\t\tvector = cg[i][0].Direction.CrossProduct(XYZ.BasisZ).Multiply(-0.5)\r\n\t\t\t\tcg[i][0] = Line.CreateBound(shotPoint, cg[i][0].Evaluate(1,True))\r\n\t\t\t\t\r\n\t\t\t\t# РњРѕР¶РµС‚ Р±С‹С‚СЊ Рё С‚Р°Рє cg[i].append(Line.CreateBound(cg[i][-1].Evaluate(1,True), cg[i][0].Evaluate(0-leftOffset,False)))\r\n\t\t\t\tcg[i].append(Line.CreateBound(cg[i][-1].Evaluate(1,True), cg[i][0].Evaluate(-offset,False)))\r\n# Р•СЃР»Рё РІ РєРѕРЅС†Рµ\r\n\t\r\n\t\t\telse:\r\n\t\t\t\tif angle2 < math.pi:\r\n\t\t\t\t\tmet = 4\r\n\t\t\t\t\t#parameter = cg[i][0].Length-rightOffset if rightOffset < cg[i][0].Length else 0\r\n\t\t\t\t\tcg[i][0] = Line.CreateBound(cg[i][0].Evaluate(0,False), cg[i][0].Evaluate(cg[i][0].Length-rightOffset,False))\r\n\t\t\t\t\tcg[i] = cg[i][1:]+cg[i][:1]\r\n\t\t\t\t\tvector = cg[i][0].Direction.Multiply(0.5)\r\n\t\r\n\t\t\t\telse:\r\n\t\t\t\t\tmet = 5\r\n\t\t\t\t\tcg[i][1] = Line.CreateBound(cg[i][1].Evaluate(leftOffset,False), cg[i][1].Evaluate(1,True))\r\n\t\t\t\t\tcg[i] = cg[i][1:]+cg[i][:1]\r\n\t\t\t\t\tvector = cg[i][-1].Direction.Multiply(0.5)\r\n\t\t\t\t\t\r\n\t\texcept: pass\r\n\t\t\r\n\t\t#if vector is not None:\r\n\t\t#if reverse:\r\n\t\t#vector = vector.Negate()\r\n\t\tp = cg[i][-1].Evaluate(1,True)\r\n\t\tdemoLine = Line.CreateBound(p, p.Add(vector)).ToProtoType()\r\n\t\tstartPoint = cg[i][-1].Evaluate(1,True)\r\n\t\t\r\n\t\tfor c in cg[i]: \r\n\t\t\ttry:\r\n\t\t\t\treport.append(c.ToProtoType())\r\n\t\t\texcept: report.append(None)\r\n\t\treport.append([demoLine,parameter,met ])\r\n\t\t#return report\r\n\t\t\r\n\t\t\r\n\t\r\n\t#return report\r\n\t\r\n\tfor g in cg:\r\n\t\tfor c in g:\r\n\t\t\t#report.append([c.ToProtoType()])\r\n\t\t\tpoints.append(c.Evaluate(0,True))\r\n\t\tpoints.append(g[-1].Evaluate(1,True))\t\r\n\t#return report\r\n\r\n\tpoints = [p.ToPoint() for p in points]\r\n\tpoints = DG.Point.PruneDuplicates(points,10)\r\n\tpoints = [p.ToXyz() for p in points]\r\n\r\n\tlines = []\r\n\tfor i in range(len(points)-1):\r\n\t\tlines.append(Line.CreateBound(points[i],points[i+1]).ToProtoType())\r\n\r\n\r\n\t\r\n\r\n\t#return lines,[p.ToPoint() for p in points]#,report\r\n\r\n\r\n\tpoly = DG.PolyCurve.ByJoinedCurves(lines,0.1)\r\n\tlines = [c.ToRevitType() for c in poly.Explode()]\r\n\r\n\tlines = RebuildLoop(lines)\r\n\r\n\tloop = CurveLoop.Create(CList[Curve](lines))\r\n\tloop1 = list(loop)\r\n\r\n\tk = -1 if reverse else 1\r\n\r\n\ttry: loop2 = list(CurveLoop.CreateViaOffset(loop,offset/2,XYZ(0,0,1*k)))\r\n\texcept: return \"РќРµ РїРѕР»СѓС‡РёР»РѕСЃСЊ СЃРѕР·РґР°С‚СЊ РѕС„С„СЃРµС‚. РџРѕРїСЂРѕР±СѓР№С‚Рµ РЅРµР·РЅР°С‡РёС‚РµР»СЊРЅРѕ РїРµСЂРµРґРІРёРЅСѓС‚СЊ С‚СЂСѓР±Сѓ РІРЅСѓС‚СЂРµРЅРЅРµРіРѕ РєРѕРЅС‚СѓСЂР° РІ СЃС‚РѕСЂРѕРЅСѓ\"\r\n\r\n\tp1 = loop1[-1].Evaluate(1,True)\r\n\tp2 = loop2[-1].Evaluate(1,True)\r\n\tp3 = p1.Add(p2).Multiply(0.5)\r\n\r\n\tline1 = Line.CreateBound(p1,p3)\r\n\tline2 = Line.CreateBound(p3,p2)\r\n\r\n\tloop2.reverse()\r\n\tloop2 = [Line.CreateBound(c.Evaluate(1,True),c.Evaluate(0,True)) for c in loop2]\r\n\r\n\tallLines = loop1 + [line1,line2] + loop2\r\n\r\n\tinLines = loop1 + [line1]\r\n\toutLines = [line2] + loop2\r\n\r\n\r\n\t#return [a.ToProtoType() for a in allLines]\r\n\r\n# Р”РѕР±Р°РІР»РµРЅРёРµ РєСЂР°РµРІ\r\n\r\n\tstartPipeLine = startPipe.Location.Curve.ToProtoType()\r\n\tfirstCurve = inLines[0].ToProtoType()\r\n\tp1 =startPipeLine.ClosestPointTo(firstCurve)\r\n\tp2 = firstCurve.ClosestPointTo(startPipeLine)\r\n\tline1 = DG.Line.ByStartPointEndPoint(p1,p2).ToRevitType()\r\n\tinLines.insert(0,line1)\r\n\r\n\tlastCurve = outLines[-1].ToProtoType()\r\n\tendPipeLine = endPipe.Location.Curve.ToProtoType()\r\n\tp1 = lastCurve.ClosestPointTo(endPipeLine)\r\n\tp2 = endPipeLine.ClosestPointTo(lastCurve)\r\n\r\n\toutLines[-1] = DG.Line.ByStartPointEndPoint( lastCurve.StartPoint,p1).ToRevitType()\r\n\ttry:\r\n\t\tline1 = DG.Line.ByStartPointEndPoint(p1,p2).ToRevitType()\r\n\t\toutLines.append(line1)\r\n\texcept: pass\t\r\n\r\n\tlineGroups = [inLines,outLines]\r\n\tpipes = []\r\n\tconnectors = []\r\n\t\r\n\t\r\n\t\r\n\t\r\n\t\r\n\r\n\t#return [a.ToProtoType() for a in outLines],[a.ToProtoType() for a in inLines]\r\n\r\n# РЎРѕР·РґР°РЅРёРµ С‚СЂСѓР±\r\n\r\n\tfor i,lines in enumerate(lineGroups):\r\n\r\n\t\tj = 0\r\n\t\twhile j < len(lines) - 1:\r\n\t\t\tres = Champfer(lines[j],lines[j+1],champfer)\r\n\t\t\tif res is not None:\r\n\t\t\t\tlines[j] = res[0]\r\n\t\t\t\tlines[j+1] = res[2]\r\n\t\t\t\tlines.insert(j+1,res[1])\r\n\t\t\t\tj+=2\r\n\t\t\telse:\r\n\t\t\t\tj+=1\r\n\r\n\t#return [[a.ToProtoType() for a in lines] for lines in lineGroups],[a.Evaluate(0.3 ,False).ToPoint() for a in lineGroups[1]]# [a.ToProtoType() for a in outLines]\r\n\r\n\tlengths = []\r\n\ttypes = [\"Р’РЅСѓС‚СЂРµРЅРЅРёР№ РєРѕРЅС‚СѓСЂ \",\"Р’РЅРµС€РЅРёР№ РєРѕРЅС‚СѓСЂ \"]\r\n\tallLen = 0\r\n\tfor i,lines in enumerate(lineGroups):\r\n\t\tsumLen = 0\r\n\t\tfor line in lines:\r\n\t\t\tsumLen += line.Length*304.8/1000\r\n\t\t\tp1 = line.Evaluate(0,True)\r\n\t\t\tp2 = line.Evaluate(1,True)\r\n\r\n\t\t\tpipe = Pipe.Create(doc,systemTypes[i].Id, pipeType.Id, level.Id, p1, p2)\r\n\t\t\tpipe.get_Parameter(BuiltInParameter.RBS_PIPE_DIAMETER_PARAM).Set(pipeDiameter)\r\n\r\n\t\t\tconnectors.append( list(pipe.ConnectorManager.Connectors))\r\n\t\t\tif onlyTest:\r\n\t\t\t\tpipe = pipe.ToDSType(False)\r\n\t\t\tpipes.append(pipe)\r\n\t\tlengths.append(types[i]+str(round(sumLen,2))+\" Рј\")\r\n\t\tallLen += sumLen\r\n\tlengths.append(\"РЎСѓРјРјР° \"+str(round(allLen,2))+\" Рј\")\t\r\n\t\t\r\n\tdoc.Regenerate()\r\n\r\n\telbows = []\r\n\tfor i in range(len(connectors)-1):\r\n\r\n\t\telbow  = None\r\n\r\n\t\tcc = ClosestConnectors(connectors[i],connectors[i+1])\r\n\t\ttry:\r\n\t\t\telbow = doc.Create.NewElbowFitting(cc[0],cc[1])\r\n\r\n\t\texcept: continue\r\n\r\n\t\tif onlyTest:\r\n\t\t\telbow = elbow.ToDSType(False)\r\n\t\telbows.append(elbow)\r\n\r\n\treturn lengths,pipes,elbows\r\n\r\n\r\n\r\nTransactionManager.Instance.EnsureInTransaction(doc)\r\nx = maincode()\r\nTransactionManager.Instance.TransactionTaskDone()\r\n\r\nOUT = x\r\n",
+      "VariableInputPorts": true,
+      "Id": "76ec961b3b44496fbebf324aa60352ff",
+      "Inputs": [
+        {
+          "Id": "e5e11f3fae2c48a7802ed45fffc057ab",
+          "Name": "IN[0]",
+          "Description": "Input #0",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "787186e58a594ec39973ace0f8d0db85",
+          "Name": "IN[1]",
+          "Description": "Input #1",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "6e0b84eb0ce847ce8d5a2a9cb6e86fa9",
+          "Name": "IN[2]",
+          "Description": "Input #2",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "f6c6c174bef54a57925ef159336941f1",
+          "Name": "IN[3]",
+          "Description": "Input #3",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "d54cfacd0d694f0f8a7ccd9b7ebfe402",
+          "Name": "IN[4]",
+          "Description": "Input #4",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "2246729499ee425ba8e5ea5c67981a45",
+          "Name": "IN[5]",
+          "Description": "Input #5",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        },
+        {
+          "Id": "fe0ef10366504767abf82669e382ff4c",
+          "Name": "IN[6]",
+          "Description": "Input #6",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Outputs": [
+        {
+          "Id": "4c70c0e87c464afc9ac587a1d50ed452",
+          "Name": "OUT",
+          "Description": "Р РµР·СѓР»СЊС‚Р°С‚ СЃС†РµРЅР°СЂРёСЏ Python",
+          "UsingDefaultValue": false,
+          "Level": 2,
+          "UseLevels": false,
+          "KeepListStructure": false
+        }
+      ],
+      "Replication": "Disabled",
+      "Description": "Р’С‹РїРѕР»РЅРµРЅРёРµ РІСЃС‚СЂРѕРµРЅРЅРѕРіРѕ СЃС†РµРЅР°СЂРёСЏ IronPython."
+    }
+  ],
+  "Connectors": [
+    {
+      "Start": "034259f881fe4aa6b943182121af765d",
+      "End": "d54cfacd0d694f0f8a7ccd9b7ebfe402",
+      "Id": "3f759d6c48154eb58bbdcb6cf89dc379"
+    },
+    {
+      "Start": "5239e02de94a45db8fec67c3410bfcd6",
+      "End": "6e0b84eb0ce847ce8d5a2a9cb6e86fa9",
+      "Id": "b1ed0eccead24e7a8e732a44d74bc85d"
+    },
+    {
+      "Start": "197d0f9b9dbd45e29cb6bf2bc4e95187",
+      "End": "fe0ef10366504767abf82669e382ff4c",
+      "Id": "0155cd21d63b4c4a970b538561380a4c"
+    },
+    {
+      "Start": "8df78762b4bb4243ac9c0aeb73e6d535",
+      "End": "f6c6c174bef54a57925ef159336941f1",
+      "Id": "7a00275b0b354130acfdc588b65550ad"
+    },
+    {
+      "Start": "383bf0417a9546dcab49697e14ec94f9",
+      "End": "2246729499ee425ba8e5ea5c67981a45",
+      "Id": "fe6a8fecd36b4ee2a4e3119015c8b7b7"
+    },
+    {
+      "Start": "d45ed7ce63594f1e80d326bf60f63172",
+      "End": "e5e11f3fae2c48a7802ed45fffc057ab",
+      "Id": "efb1091c8dee4741b2695470b62ecef2"
+    },
+    {
+      "Start": "fb0608cce86241579956f3275e184a1b",
+      "End": "787186e58a594ec39973ace0f8d0db85",
+      "Id": "17fe1ffc7dd24cedb2ee22f706235bfd"
+    },
+    {
+      "Start": "4c70c0e87c464afc9ac587a1d50ed452",
+      "End": "5041019142cc41f290b14e2e3605c29c",
+      "Id": "deb3ff083d1a456c9dca7ba57ffa3377"
+    }
+  ],
+  "Dependencies": [],
+  "Bindings": [],
+  "View": {
+    "Dynamo": {
+      "ScaleFactor": 10000.0,
+      "HasRunWithoutCrash": true,
+      "IsVisibleInDynamoLibrary": true,
+      "Version": "2.0.2.6826",
+      "RunType": "Manual",
+      "RunPeriod": "1000"
+    },
+    "Camera": {
+      "Name": "Р¤РѕРЅРѕРІС‹Р№ РїСЂРѕСЃРјРѕС‚СЂ",
+      "EyeX": 18759.046998733069,
+      "EyeY": 3677.6319718358559,
+      "EyeZ": -82863.207921882975,
+      "LookX": -42.077659586480877,
+      "LookY": -3021.5395008563614,
+      "LookZ": -380.4874081233138,
+      "UpX": -0.10354976029541743,
+      "UpY": 0.33545156975013929,
+      "UpZ": -0.93634912906164325
+    },
+    "NodeViews": [
+      {
+        "ShowGeometry": true,
+        "Name": "Р Р°СЃСЃС‚РѕСЏРЅРёРµ: РњРёР»Р»РёРјРµС‚СЂС‹",
+        "Id": "b414edc66bb547349c33ea24fd7f01d2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1696.0310688661236,
+        "Y": 566.67152243346891
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Р’РЅРµС€РЅРёР№ РєРѕРЅС‚СѓСЂ",
+        "Id": "c08c0166a79749d9bb02fe11c7439c91",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1694.9626938842482,
+        "Y": 194.78093579649493
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "РџРѕ С‡Р°СЃРѕРІРѕР№ / РџСЂРѕС‚РёРІ",
+        "Id": "7fe8fe48eab143f6b9880aa2fc680fd3",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1710.679746295154,
+        "Y": 866.0407066945836
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Р’РЅСѓС‚СЂРµРЅРЅРёР№ РєРѕРЅС‚СѓСЂ",
+        "Id": "c811cd6d720e4a72bade5bd5e05efaeb",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1695.7622909628972,
+        "Y": 380.73347990754252
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "РћС‚С‡РµС‚",
+        "Id": "780eeaff00724c5b9016bd9457dc7ee7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2782.5458837813094,
+        "Y": 371.08111462478291
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "РљСЂРѕРјРєР°: РњРёР»Р»РёРјРµС‚СЂС‹",
+        "Id": "cc2ab6417e8d49eba7612aefbdc7c687",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1697.2604293401946,
+        "Y": 701.57926518630575
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "РўРµСЃС‚РёСЂРѕРІР°С‚СЊ / РЎРѕР·РґР°С‚СЊ",
+        "Id": "99ffaefc4e5c485d91c5062fda059ab2",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1691.7574676412548,
+        "Y": -114.34647368044912
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Select Model Element",
+        "Id": "2ffe469ad5c34fe1b5ad7aab0955f9f7",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 1692.1300592896164,
+        "Y": 9.9067355875257022
+      },
+      {
+        "ShowGeometry": true,
+        "Name": "Python Script",
+        "Id": "76ec961b3b44496fbebf324aa60352ff",
+        "IsSetAsInput": false,
+        "IsSetAsOutput": false,
+        "Excluded": false,
+        "X": 2481.2688419695692,
+        "Y": 401.75832204940639
+      }
+    ],
+    "Annotations": [
+      {
+        "Id": "1cd2983ff2bb4dbb8bd7770a376062d5",
+        "Title": "РџР РћР§РРўРђР™РўР• РџР•Р Р•Р” Р—РђРџРЈРЎРљРћРњ\r\n\r\nв—Џ РќРђР—Р’РђРќРР•: РЎРѕР·РґР°РЅРёРµ С‚РµРїР»С‹С… РїРѕР»РѕРІ\r\n\r\nв—Џ РћРџРРЎРђРќРР•: РЎРєСЂРёРїС‚ СЃРѕР·РґР°РµС‚ С‚РµРїР»С‹Рµ РїРѕР»С‹ РїРѕ РІС‹Р±СЂР°РЅРЅРѕР№ РѕР±Р»Р°СЃС‚Рё Р·Р°Р»РёРІРєРё Рё РґРІСѓРј С‚СЂСѓР±Р°Рј. РЎРєСЂРёРїС‚ Р·Р°РїРѕР»РЅСЏРµС‚ РїСЂРѕСЃС‚СЂР°РЅСЃС‚РІРѕ РєРѕРЅС‚СѓСЂР° РїРѕ СЃРїРёСЂР°Р»Рё. РЎС‚Р°СЂС‚ Рё РєРѕРЅРµС† Р·Р°РєСЂСѓС‡РёРІР°РЅРёСЏ СЃРїРёСЂР°Р»Рё РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ РїРѕР»РѕР¶РµРЅРёРµРј С‚СЂСѓР±.  РўРёРї СЃРёСЃС‚РµРјС‹ Рё С‚РёРї С‚СЂСѓР± РІ СЃРїРёСЂР°Р»Рё С‚Р°РєР¶Рµ РѕРїСЂРµРґРµР»СЏРµС‚СЃСЏ СЃРІРѕР№СЃС‚РІР°РјРё С‚СЂСѓР±.\r\n\r\nв—Џ РџРћР РЇР”РћРљ Р’Р«РџРћР›РќР•РќРРЇ: \r\n1. РЈСЃС‚Р°РЅРѕРІРёС‚Рµ СЂРµР¶РёРј СЂР°Р±РѕС‚С‹, РІ РєРѕС‚РѕСЂРѕРј РІС‹ С…РѕС‚РёС‚Рµ СЃРѕР·РґР°РІР°С‚СЊ С‚СЂСѓР±С‹.\r\n2. Р’С‹Р±РµСЂРёС‚Рµ РѕР±Р»Р°СЃС‚СЊ, РєРѕС‚РѕСЂСѓСЋ РІС‹ С…РѕС‚РёС‚Рµ Р·Р°РїРѕР»РЅРёС‚СЊ.\r\n3. Р’С‹Р±РµСЂРёС‚Рµ РґРІРµ С‚СЂСѓР±С‹, РѕРїСЂРµРґРµР»СЏСЋС‰РёРµ РЅР°СЂСѓР¶РЅС‹Р№ Рё РІРЅСѓС‚СЂРµРЅРЅРёР№ РєРѕРЅС‚СѓСЂ.\r\n4. РЈСЃС‚Р°РЅРѕРІРёС‚Рµ РѕС„С„СЃРµС‚ РјРµР¶РґСѓ СЃРѕСЃРµРґРЅРёРјРё С‚СЂСѓР±Р°РјРё\r\n5. РЈСЃС‚Р°РЅРѕРІРёС‚Рµ С€РёСЂРёРЅСѓ РєСЂРѕРјРєРё РїСЂРё РѕСЃС‚СЂС‹С… СѓРіР»Р°С…\r\n6. Р—Р°РїСѓСЃС‚РёС‚Рµ СЃРєСЂРёРїС‚. \r\n7. РџРѕСЃР»Рµ РѕС‚СЂР°Р±РѕС‚РєРё СЃРєСЂРёРїС‚Р° РїСЂРѕС‡РёС‚Р°Р№С‚Рµ, С‡С‚Рѕ РЅР°РїРёСЃР°РЅРѕ РІ РѕС‚С‡РµС‚Рµ. Р’ СЃР»СѓС‡Р°РµС‚ РїРѕР·РЅРёРєС€РµРіРѕ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёСЏ, РёСЃРїСЂР°РІСЊС‚Рµ СЌС‚Рѕ РїСЂРµРґСѓРїСЂРµР¶РґРµРЅРёРµ Рё РїРµСЂРµР·Р°РїСѓСЃС‚РёС‚Рµ СЃРєСЂРёРїС‚.\r\n8. Р”Р»СЏ РїРµСЂРµР·СѓРїСѓСЃРєР° СЃРєСЂРёРїС‚Р° РїРµСЂРµРєР»СЋС‡РёС‚Рµ Р·РЅР°С‡РµРЅРёРµ true/false РЅР° РЅРѕРґРµ \"РџРµСЂРµР·Р°РїСѓСЃРє\" Рё Р·Р°РЅРѕРІРѕ Р·Р°РїСѓСЃС‚РёС‚Рµ СЃРєСЂРёРїС‚. \r\n\r\n\r\nв—Џ РљРћРњРњР•РќРўРђР РР:\r\n\r\n\r\nв—Џ Р—РђРљРђР—Р§РРљ:  \r\nв—Џ Р РђР—Р”Р•Р›Р«: РћР’\r\nв—Џ РЎРћР¤Рў:  Revit 2019.2\r\nв—Џ DYNAMO: Dynamo 2.0.3",
+        "Nodes": [
+          "666fad08985847ceb9c8aa80e8e34246"
+        ],
+        "Left": 1011.2973021656318,
+        "Top": -306.6881963279435,
+        "Width": 526.4,
+        "Height": 601.6,
+        "FontSize": 14.0,
+        "InitialTop": 207.3118036720565,
+        "InitialHeight": 140.0,
+        "TextblockHeight": 504.0,
+        "Background": "#FFB5B5B5"
+      },
+      {
+        "Id": "62d41561373d47178af0e3f4057b70d9",
+        "Title": "Р Р°СЃСЃС‚РѕСЏРЅРёРµ РјРµР¶РґСѓ РїР°СЂР°Р»Р»РµР»СЊРЅС‹РјРё С‚СЂСѓР±Р°РјРё",
+        "Nodes": [
+          "b414edc66bb547349c33ea24fd7f01d2"
+        ],
+        "Left": 1686.0310688661236,
+        "Top": 536.67152243346891,
+        "Width": 319.2,
+        "Height": 97.8,
+        "FontSize": 14.0,
+        "InitialTop": 566.67152243346891,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FF71C6A8"
+      },
+      {
+        "Id": "c74f62d709884c3bb28f8904f1524a4d",
+        "Title": "Р’С‹Р±РµСЂРёС‚Рµ С‚СЂСѓР±Сѓ, РєРѕС‚РѕСЂР°СЏ РґР°СЃС‚ СЃС‚Р°СЂС‚ РІРЅРµС€РЅРµРјСѓ РєРѕРЅС‚СѓСЂСѓ",
+        "Nodes": [
+          "c08c0166a79749d9bb02fe11c7439c91"
+        ],
+        "Left": 1684.9626938842482,
+        "Top": 151.18093579649494,
+        "Width": 195.2,
+        "Height": 163.39999999999998,
+        "FontSize": 14.0,
+        "InitialTop": 194.78093579649493,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 33.6,
+        "Background": "#FF71C6A8"
+      },
+      {
+        "Id": "adcd7a4567e249169b83a4b17ff8329f",
+        "Title": "Р’С‹Р±РµСЂРёС‚Рµ С‚СЂСѓР±Сѓ, РєРѕС‚РѕСЂР°СЏ РґР°СЃС‚ СЃС‚Р°СЂС‚ РІРЅСѓС‚СЂРµРЅРЅРµРјСѓ РєРѕРЅС‚СѓСЂСѓ",
+        "Nodes": [
+          "c811cd6d720e4a72bade5bd5e05efaeb"
+        ],
+        "Left": 1685.7622909628972,
+        "Top": 337.13347990754249,
+        "Width": 195.2,
+        "Height": 163.40000000000003,
+        "FontSize": 14.0,
+        "InitialTop": 380.73347990754252,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 33.6,
+        "Background": "#FF71C6A8"
+      },
+      {
+        "Id": "7a69bde54a894af491e127667d30a43e",
+        "Title": "РќР°РїСЂР°РІР»РµРЅРёРµ Р·Р°РєСЂСѓС‡РёРІР°РЅРёСЏ СЃРїРёСЂР°Р»Рё",
+        "Nodes": [
+          "7fe8fe48eab143f6b9880aa2fc680fd3"
+        ],
+        "Left": 1700.679746295154,
+        "Top": 822.44070669458358,
+        "Width": 166.4,
+        "Height": 111.40000000000002,
+        "FontSize": 14.0,
+        "InitialTop": 866.0407066945836,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 33.6,
+        "Background": "#FF71C6A8"
+      },
+      {
+        "Id": "34420df8d2984182b490773bff6e2528",
+        "Title": "Р’ СЂРµР¶РёРјРµ С‚РµСЃС‚РёСЂРѕРІР°РЅРёСЏ СЃРѕР·РґР°РЅРЅС‹Рµ С‚СЂСѓР±С‹ Р±СѓРґСѓС‚ СѓРґР°Р»СЏС‚СЊСЃСЏ РїСЂРё РїРµСЂРµР·Р°РїСѓСЃРєРµ СЃРєСЂРёРїС‚Р° ",
+        "Nodes": [
+          "99ffaefc4e5c485d91c5062fda059ab2"
+        ],
+        "Left": 1681.7574676412548,
+        "Top": -191.54647368044914,
+        "Width": 177.6,
+        "Height": 145.0,
+        "FontSize": 14.0,
+        "InitialTop": -114.34647368044912,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 67.2,
+        "Background": "#FFFFB8D8"
+      },
+      {
+        "Id": "a0d954d6ed264800950eb8af48c29043",
+        "Title": "РЁСЂРёРЅР° РєСЂРѕРјРєРё РїСЂРё РѕСЃС‚СЂС‹С… СѓРіР»Р°С…",
+        "Nodes": [
+          "cc2ab6417e8d49eba7612aefbdc7c687"
+        ],
+        "Left": 1687.2604293401946,
+        "Top": 671.57926518630575,
+        "Width": 319.2,
+        "Height": 97.8,
+        "FontSize": 14.0,
+        "InitialTop": 701.57926518630575,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FF71C6A8"
+      },
+      {
+        "Id": "b50bdad345ad4f6b8afcefe3407aa8c3",
+        "Title": "Р’С‹Р±РµСЂРёС‚Рµ РѕР±Р»Р°СЃС‚СЊ Р·Р°Р»РёРІРєРё",
+        "Nodes": [
+          "2ffe469ad5c34fe1b5ad7aab0955f9f7"
+        ],
+        "Left": 1682.1300592896164,
+        "Top": -20.093264412474298,
+        "Width": 195.2,
+        "Height": 149.8,
+        "FontSize": 14.0,
+        "InitialTop": 9.9067355875257022,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FF71C6A8"
+      },
+      {
+        "Id": "b8b6522f36bb42d891472be874cdce20",
+        "Title": "",
+        "Nodes": [
+          "780eeaff00724c5b9016bd9457dc7ee7"
+        ],
+        "Left": 2772.5458837813094,
+        "Top": 341.08111462478291,
+        "Width": 296.8,
+        "Height": 406.6,
+        "FontSize": 14.0,
+        "InitialTop": 371.08111462478291,
+        "InitialHeight": 145.0,
+        "TextblockHeight": 20.0,
+        "Background": "#FF48B9FF"
+      },
+      {
+        "Id": "666fad08985847ceb9c8aa80e8e34246",
+        "Title": "Р Р°Р·СЂР°Р±РѕС‚С‡РёРє:                                                                                                                              \r\nР’СЃРµРІРѕР»РѕРґ Р§СѓРіСЂРµРµРІ\r\nvschugr@gmail.com\r\n+7-921-582-91-00                                                               ",
+        "Nodes": [],
+        "Left": 1021.2973021656318,
+        "Top": 207.3118036720565,
+        "Width": 0.0,
+        "Height": 0.0,
+        "FontSize": 36.0,
+        "InitialTop": 0.0,
+        "InitialHeight": 0.0,
+        "TextblockHeight": 0.0,
+        "Background": "#FFC1D676"
+      }
+    ],
+    "X": -423.27022358257659,
+    "Y": 25.870283924998489,
+    "Zoom": 0.27940777062911648
+  }
+}
