@@ -1,0 +1,73 @@
+<Workspace Version="1.3.4.6666" X="-24" Y="23.2" zoom="1" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="True">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="34cf0ae2-7d83-4e23-a956-c8b5522e6e73" type="PythonNodeModels.PythonNode" nickname="Python Script" x="301.2" y="251.2" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>import clr
+from System.Collections.Generic import *
+
+clr.AddReference("RevitAPI")
+import Autodesk
+from Autodesk.Revit.DB import *
+
+clr.AddReference("RevitAPIUI")
+from Autodesk.Revit.UI import *
+
+clr.AddReference("RevitServices")
+import RevitServices
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+
+doc = DocumentManager.Instance.CurrentDBDocument
+uiapp = DocumentManager.Instance.CurrentUIApplication
+app = uiapp.Application
+uidoc=DocumentManager.Instance.CurrentUIApplication.ActiveUIDocument
+
+ObjType = Autodesk.Revit.UI.Selection.ObjectType
+StructType = Autodesk.Revit.DB.Structure.StructuralType.NonStructural
+
+linkInstances = FilteredElementCollector(doc).OfClass(RevitLinkInstance)
+linkDocument = [i.GetLinkDocument() for i in linkInstances]
+
+elem_link = uidoc.Selection.PickObject(ObjType.LinkedElement, "Выберите элемент связанного файла")#.LinkedElementId
+
+_debug =[]
+host = []
+res = {}
+el = None
+
+for link in linkDocument:
+	try:
+		el = link.GetElement(elem_link.LinkedElementId)
+	except: pass
+	if el != None:
+		res[el.Document.Title] = el
+
+res_string = ''
+for key in res:
+    res_string += 'Id {1} ({0}), {2}; \n'.format(res[key].Category.Name ,res[key].Id, key)
+
+if len(host) == 0:
+    TaskDialog.Show('Выбранный элемент',
+                    res_string)
+
+
+
+OUT = host, elem_link.CreateReferenceInLink()</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Input.BoolSelector guid="4a836a29-1fce-447c-9e57-7c2c0ee34c02" type="CoreNodeModels.Input.BoolSelector" nickname="Boolean" x="141.2" y="255.2" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>True</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="4a836a29-1fce-447c-9e57-7c2c0ee34c02" start_index="0" end="34cf0ae2-7d83-4e23-a956-c8b5522e6e73" end_index="0" portType="0" />
+  </Connectors>
+  <Notes>
+    <Dynamo.Graph.Notes.NoteModel guid="15622c12-b9be-452f-9940-11dc0238fdc1" text="Инструкция:&#xD;&#xA;Запустить скрипт и выбрать элемент связанной модели. Скрипт позволит выбрать элементы только из связанных файлов.&#xD;&#xA;В результате появится диалоговое окно, в котором будет выданы следующие данные:&#xD;&#xA;&lt;id элемента&gt; (Имя категории), &lt;Имя связанного файла&gt;;&#xD;&#xA;&#xD;&#xA;Возможна ситуация, когда будут выданы две и более строчек информации об элементы. В данном случае следует выбрать необходимые параметры исходя из имени документа." x="194" y="-11.2" />
+  </Notes>
+  <Annotations />
+  <Presets />
+  <Cameras>
+    <Camera Name="Фоновый просмотр" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
