@@ -1,0 +1,874 @@
+<Workspace Version="1.3.1.1736" X="1008.4933172364" Y="388.564287863896" zoom="0.442030567873552" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="True">
+  <NamespaceResolutionMap />
+  <Elements>
+    <PythonNodeModels.PythonNode guid="e6cf539c-e637-4463-b61c-d14530e45e7f" type="PythonNodeModels.PythonNode" nickname="Удалить все шаблоны вида" x="1133.8593490253" y="548.167694391713" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>if IN[0] == True:
+	import clr
+	clr.AddReference('RevitAPI')
+	from Autodesk.Revit.DB import*
+	clr.AddReference('RevitServices')
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	views = FilteredElementCollector(doc).OfClass(View)
+	appliedtemplates = [v.ViewTemplateId for v in views]
+	templates = [v.Id for v in views if v.IsTemplate == True]
+	ln=len(templates)
+	"""
+	toDelete = []
+	for t in templates:
+		if t not in appliedtemplates:
+			toDelete.append(t)
+	"""
+	TransactionManager.Instance.EnsureInTransaction(doc)
+	for e in templates:
+		doc.Delete(e)
+	TransactionManager.Instance.TransactionTaskDone()
+	
+	OUT = str(ln)+' Template(s) deleted' 
+else:
+	pass</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="3ca8e1ee-c2ae-45d2-bfb5-8225db3dbe15" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1830.98851540298" y="708.631981541505" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;Удалить выбранные шаблоны&quot;;&#xA;&quot;templates_to_del&quot;;" ShouldFocus="false" />
+    <PythonNodeModels.PythonNode guid="f8492ae9-f34b-4839-a254-763d5bb9565f" type="PythonNodeModels.PythonNode" nickname="Удалить не использованные шаблоны вида" x="1129.8000875337" y="673.394791118268" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>if IN[0] == True:
+	import clr
+	clr.AddReference('RevitAPI')
+	from Autodesk.Revit.DB import*
+	clr.AddReference('RevitServices')
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	views = FilteredElementCollector(doc).OfClass(View)
+	appliedtemplates = [v.ViewTemplateId for v in views]
+	templates = [v.Id for v in views if v.IsTemplate == True]
+	
+	toDelete = []
+	for t in templates:
+		if t not in appliedtemplates:
+			toDelete.append(t)
+	
+	TransactionManager.Instance.EnsureInTransaction(doc)
+	for e in toDelete:
+		doc.Delete(e)
+	TransactionManager.Instance.TransactionTaskDone()
+	
+	OUT = '%d Template(s) deleted' %(len(toDelete))
+else:
+	pass</Script>
+    </PythonNodeModels.PythonNode>
+    <PythonNodeModels.PythonNode guid="0ae286ce-8021-472a-bcd9-23e36e3c1f8c" type="PythonNodeModels.PythonNode" nickname="Получаем список шаблонов" x="1137.08467649461" y="952.87650972402" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>if IN[0] == True:
+	import clr
+	clr.AddReference('RevitAPI')
+	from Autodesk.Revit.DB import*
+	clr.AddReference('RevitServices')
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	views = FilteredElementCollector(doc).OfClass(View)
+	appliedtemplates = [v.ViewTemplateId for v in views]
+	templatesID = [v.Id for v in views if v.IsTemplate == True]
+	templates = [v for v in views if v.IsTemplate == True]
+	templatesName = [v.Name for v in views if v.IsTemplate == True]
+	
+	OUT = templatesName, templatesID, templates
+else:
+	OUT = [[],[],[]]</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="96537a58-f6c0-4098-8dfb-ce471d6c1e86" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="DynoStudio.ShowDialog" x="2300.92744748476" y="717.924350684188" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="C:\Program Files\Prorubim Nodes\Prorubim Dyno\bin\DynoNodes.dll" function="Prorubim.DynoNodes.DynoStudio.ShowDialog@string[],string[],var[]..[],bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="4aea3a0d-9bee-463f-b6ed-eb134c85ea1a" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1781.36025259081" y="1119.69676757419" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="list[0];&#xA;list[1];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <CoreNodeModels.CreateList guid="b2144731-d054-4a3d-a33c-32bad03f898a" type="CoreNodeModels.CreateList" nickname="List.Create" x="1975.88549617283" y="1061.40986334108" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.CreateList>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="45935989-efbe-470e-96d3-26b5fb4feb39" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="String.Contains" x="2789.64213043398" y="1032.45198032088" isVisible="true" isUpstreamVisible="true" lacing="CrossProduct" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.String.Contains@string,string,bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="25697d3e-7b95-4845-8c9e-dda5374959e7" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="AllFalse" x="3162.21269819656" y="1035.3910155217" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="BuiltIn" function="AllFalse@var[]..[]">
+      <PortInfo index="0" default="False" useLevels="True" level="2" shouldKeepListStructure="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="086a98ef-5875-4a80-bccf-b8c5954ed20f" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.FilterByBoolMask" x="3436.57095049069" y="1202.35179520823" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.List.FilterByBoolMask@var[]..[],var[]..[]">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="e2bd49f1-6524-434e-a0f6-448af5d8835d" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="3775.90190561634" y="1313.94471915059" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" CodeText="SELECTET;" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="bfcab5b9-b9a6-4344-9845-5648a524c882" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="3752.34695220634" y="1625.96689549311" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" CodeText="dontSELECTET;" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <PythonNodeModels.PythonNode guid="021b275a-4a7a-4a05-b237-c477a0a380c9" type="PythonNodeModels.PythonNode" nickname="Удалить по фильтру" x="4243.54502952237" y="1731.65577932467" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="3">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <Script>import clr
+clr.AddReference('RevitAPI')
+from Autodesk.Revit.DB import*
+clr.AddReference('RevitServices')
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+doc = DocumentManager.Instance.CurrentDBDocument
+
+toDelete = []
+select = IN[1]
+notselect = IN[2]
+if len(select) &gt; 0:
+	toDelete = select
+elif len(notselect) &gt; 0:
+	toDelete = notselect
+else:
+	pass
+
+TransactionManager.Instance.EnsureInTransaction(doc)
+for e in toDelete:
+	doc.Delete(e)
+TransactionManager.Instance.TransactionTaskDone()
+
+OUT = '%d Template(s) deleted' %(len(toDelete))
+</Script>
+    </PythonNodeModels.PythonNode>
+    <Prorubim.DS.Common.ForceChildrensEval guid="0ce1c9b1-5975-4fa6-8c02-c2c822960b34" type="Prorubim.DS.Common.ForceChildrensEval" nickname="ForceChildrensEval" x="2365.27889506974" y="142.2589681546" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </Prorubim.DS.Common.ForceChildrensEval>
+    <CoreNodeModels.Input.BoolSelector guid="3a115959-2d84-459e-b191-622239c1da4a" type="CoreNodeModels.Input.BoolSelector" nickname="t) Удалить всё" x="-384.812815277301" y="729.799806622627" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Input.BoolSelector guid="293dafd3-d58c-44dc-a01f-2a400ca9c518" type="CoreNodeModels.Input.BoolSelector" nickname="t) Удалить не использованное" x="-381.60042321228" y="813.047062107375" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Input.BoolSelector guid="5ec56faa-0518-4160-b839-b1981cf21b1d" type="CoreNodeModels.Input.BoolSelector" nickname="t) Выбрать и удалить" x="-385.02371306213" y="908.034147846642" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Input.StringInput guid="7265870e-3367-4994-bdd3-36f0dfb2f45b" type="CoreNodeModels.Input.StringInput" nickname="formTabs" x="-2055.00328654373" y="-150.592095754444" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.String>Варианты запуска</System.String>
+      <System.String value="Варианты запуска" />
+    </CoreNodeModels.Input.StringInput>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="46cbf384-bfe8-4d25-898c-5a03dc08afd3" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1767.20150227363" y="1993.5129070655" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;Сохранить выбранные шаблоны&quot;;&#xA;&quot;templates_to_save&quot;;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="57981d2e-1e01-4c47-b3fe-b51a7e4fc715" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="DynoStudio.ShowDialog" x="2207.2615518509" y="1986.61571229244" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="C:\Program Files\Prorubim Nodes\Prorubim Dyno\bin\DynoNodes.dll" function="Prorubim.DynoNodes.DynoStudio.ShowDialog@string[],string[],var[]..[],bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <CoreNodeModels.Input.BoolSelector guid="9d87fbeb-6b8d-45ca-9546-2432b60751a9" type="CoreNodeModels.Input.BoolSelector" nickname="t) Выбрать и оставить" x="-387.291700345047" y="990.529573072017" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="03aa3304-94cc-486e-842b-ed208a82e4fb" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.FilterByBoolMask" x="3426.97133519196" y="1767.22516656234" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.List.FilterByBoolMask@var[]..[],var[]..[]">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="82de72ca-73a9-4d28-88e6-f07f5794cc18" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="String.Contains" x="2815.40887498661" y="1652.14691327083" isVisible="true" isUpstreamVisible="true" lacing="CrossProduct" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.String.Contains@string,string,bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="94e084d9-4e4e-4344-b969-d805fc4be2ac" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="AllFalse" x="3142.63475965104" y="1655.70206873451" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="BuiltIn" function="AllFalse@var[]..[]">
+      <PortInfo index="0" default="False" useLevels="True" level="2" shouldKeepListStructure="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <PythonNodeModels.PythonNode guid="346274c3-b4d6-4ced-8943-6c4f97b80717" type="PythonNodeModels.PythonNode" nickname="Получаем список шаблонов" x="1141.65895786794" y="1161.57689027037" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>if IN[0] == True:
+	import clr
+	clr.AddReference('RevitAPI')
+	from Autodesk.Revit.DB import*
+	clr.AddReference('RevitServices')
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	views = FilteredElementCollector(doc).OfClass(View)
+	appliedtemplates = [v.ViewTemplateId for v in views]
+	templatesID = [v.Id for v in views if v.IsTemplate == True]
+	templates = [v for v in views if v.IsTemplate == True]
+	templatesName = [v.Name for v in views if v.IsTemplate == True]
+	
+	OUT = templatesName, templatesID, templates
+else:
+	OUT = [[],[],[]]</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="04231c95-b707-4577-a61b-d6c5a90cd469" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1787.23737998552" y="1546.78701756254" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="list[0];&#xA;list[1];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <CoreNodeModels.CreateList guid="afc5ca50-3648-4461-acf2-ecb64f6aaa89" type="CoreNodeModels.CreateList" nickname="List.Create" x="1969.58764865295" y="1634.5998123045" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.CreateList>
+    <CoreNodeModels.Watch guid="049b17c3-b513-4717-b202-5f8923f30e02" type="CoreNodeModels.Watch" nickname="Количество удалённых шаблонов" x="4490.32932511999" y="1730.02788639181" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+    <PythonNodeModels.PythonNode guid="97712cf9-414c-4755-b9f6-f20c60f5d757" type="PythonNodeModels.PythonNode" nickname="Удалить не использованные фильтры [Modelical]" x="970.436585932366" y="-1437.49737647944" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>#Note: The methods used in this script has been taken from Paul Wintour's BVN package and reused to achieve the purpose oh the same. https://parametricmonkey.com/2016/03/09/get-unused-filters/
+if IN[0] == True:
+	import clr
+	clr.AddReference('ProtoGeometry')
+	from Autodesk.DesignScript.Geometry import *
+	
+	clr.AddReference("System.Core")
+	import System.Linq
+	clr.ImportExtensions(System.Linq)
+	
+	clr.AddReference("RevitAPI")
+	import Autodesk.Revit
+	from Autodesk.Revit.Exceptions import InvalidOperationException
+	from Autodesk.Revit.DB import *
+	from Autodesk.Revit.DB import ElementId
+	from System.Collections.Generic import *
+	
+	# Import ToDSType(bool) extension method
+	clr.AddReference("RevitNodes")
+	import Revit
+	clr.ImportExtensions(Revit.Elements)
+	
+	# Import DocumentManager
+	clr.AddReference("RevitServices")
+	import RevitServices
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	from RevitServices.Persistence import DocumentManager
+	
+	def GetUsedFilterIds(doc):
+	  views = FilteredElementCollector(doc).OfClass(View).ToElements()
+	  usedFilterIds = []
+	  for view in views:
+	    viewFilterIds = []
+	    try:
+	      viewFilterIds = view.GetFilters()
+	    except InvalidOperationException, e:
+	      pass # this exception happens when a view doesn't support filters
+	    usedFilterIds.extend(viewFilterIds)
+	  return usedFilterIds
+	
+	def GetUnusedFilters(doc):
+	  usedFilterIds = GetUsedFilterIds(doc).ToList[ElementId]()
+	  unusedFilters = FilteredElementCollector(doc).OfClass(ParameterFilterElement).Excluding(usedFilterIds).ToElements()
+	  return list(f.ToDSType(True) for f in unusedFilters)
+	
+	#The inputs to this node will be stored as a list in the IN variables.
+	
+	bool = IN[0]
+	output = "Set Toggle to TRUE to delete unused filters"
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	filters = GetUnusedFilters(doc)
+	filters2 = UnwrapElement(filters)
+	filtersID = []
+	filtersNames = []
+	
+	if bool == True:
+		for f in filters2:
+			filtersID.append(f.Id)
+	
+		TransactionManager.Instance.EnsureInTransaction(doc)
+	
+		for f in filtersID:
+			filtersNames.append(doc.GetElement(f).Name)
+			doc.Delete(f)
+	
+		TransactionManager.Instance.TransactionTaskDone()
+		output = filtersNames
+	#Assign your output to the OUT variable.
+	OUT = output
+else:
+	pass</Script>
+    </PythonNodeModels.PythonNode>
+    <CoreNodeModels.Input.BoolSelector guid="85339da8-29da-40c3-8f09-fc5cd5e2ffe4" type="CoreNodeModels.Input.BoolSelector" nickname="Удаляем шаблоны" x="-2247.98061398187" y="-75.0670742823395" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Input.BoolSelector guid="ebf7e559-3e9b-444a-910f-316569faf2cb" type="CoreNodeModels.Input.BoolSelector" nickname="Удаляем фильтры" x="-2248.00184109854" y="-154.308669967106" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.CreateList guid="58d2264f-ecb5-4cf1-ab7d-cfe15eaadaac" type="CoreNodeModels.CreateList" nickname="List.Create" x="-42.4380193569251" y="755.878026614458" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="4">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="False" />
+    </CoreNodeModels.CreateList>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="730.893565936892" y="725.420625166201" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" CodeText="list[0];&#xA;list[1];&#xA;list[2];&#xA;list[3];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <PythonNodeModels.PythonNode guid="cd527508-d39a-4cb5-ba9d-99b189261c14" type="PythonNodeModels.PythonNode" nickname="if" x="546.84454017993" y="723.940310542949" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="4">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="False" />
+      <Script>import clr
+boolean = IN[0]
+true = UnwrapElement(IN[1])
+false = UnwrapElement(IN[2])
+
+if boolean:
+	out = true
+else:
+	out = false
+
+#Назначьте вывод переменной OUT.
+OUT = out</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="0c25d82c-9fe9-4838-9734-564a5a09757e" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="177.665677728601" y="844.723142366982" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="{false,false,false,false};" ShouldFocus="false" />
+    <CoreNodeModels.Input.BoolSelector guid="129d7f3c-0e37-4019-b7b9-cfc8c6493b3d" type="CoreNodeModels.Input.BoolSelector" nickname="f) Выбрать и оставить" x="-402.229086318821" y="-1193.73974677956" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.Input.BoolSelector guid="0e1ce6c6-4043-4720-b850-bee9494a6fbb" type="CoreNodeModels.Input.BoolSelector" nickname="f) Выбрать и удалить" x="-400.268846637754" y="-1270.92697061456" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="b1f739ae-26b3-40d9-b149-6f98599a9f85" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="79.9554005707587" y="-1306.36607883026" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="{false,false,false,false};" ShouldFocus="false" />
+    <CoreNodeModels.Input.BoolSelector guid="e76a4145-d4b5-417c-a88c-4d67e8e6da22" type="CoreNodeModels.Input.BoolSelector" nickname="f) Удалить не использованное" x="-406.668804748891" y="-1357.15604285737" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <CoreNodeModels.CreateList guid="c56a082e-092e-4248-a7c2-772f33b565d1" type="CoreNodeModels.CreateList" nickname="List.Create" x="-92.0349669934641" y="-1442.01104989252" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="4">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="False" />
+    </CoreNodeModels.CreateList>
+    <CoreNodeModels.Input.BoolSelector guid="5baade7a-00b4-4b4f-bd5e-5b053ef5677a" type="CoreNodeModels.Input.BoolSelector" nickname="f) Удалить всё" x="-395.574133281369" y="-1440.88926984951" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="True" IsFrozen="false" isPinned="false">
+      <System.Boolean>False</System.Boolean>
+    </CoreNodeModels.Input.BoolSelector>
+    <PythonNodeModels.PythonNode guid="8469d74a-fb6a-470a-aea3-6c87383bb48f" type="PythonNodeModels.PythonNode" nickname="if" x="438.645610137818" y="-1455.14313662868" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="4">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="False" />
+      <Script>import clr
+boolean = IN[0]
+true = UnwrapElement(IN[1])
+false = UnwrapElement(IN[2])
+
+if boolean:
+	out = true
+else:
+	out = false
+
+#Назначьте вывод переменной OUT.
+OUT = out</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="697870c7-cdf3-4c1d-8299-97b7f68f1188" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="628.689672690513" y="-1450.66530360756" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" CodeText="list[0];&#xA;list[1];&#xA;list[2];&#xA;list[3];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <PythonNodeModels.PythonNode guid="47e8d2c0-d8cc-418c-bdcd-7c45dd3d2bcc" type="PythonNodeModels.PythonNode" nickname="Удалить все фильтры" x="969.584392940736" y="-1580.91974593195" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>if IN[0] == True:
+	import clr
+	clr.AddReference('ProtoGeometry')
+	from Autodesk.DesignScript.Geometry import *
+	
+	clr.AddReference("System.Core")
+	import System.Linq
+	clr.ImportExtensions(System.Linq)
+	
+	clr.AddReference("RevitAPI")
+	import Autodesk.Revit
+	from Autodesk.Revit.Exceptions import InvalidOperationException
+	from Autodesk.Revit.DB import *
+	from Autodesk.Revit.DB import ElementId
+	from System.Collections.Generic import *
+	
+	# Import ToDSType(bool) extension method
+	clr.AddReference("RevitNodes")
+	import Revit
+	clr.ImportExtensions(Revit.Elements)
+	
+	# Import DocumentManager
+	clr.AddReference("RevitServices")
+	import RevitServices
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	from RevitServices.Persistence import DocumentManager
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	Filters = FilteredElementCollector(doc).OfClass(ParameterFilterElement).ToElements()
+	
+	#The inputs to this node will be stored as a list in the IN variables.
+	
+	filtersID = []
+	filtersNames = []
+	
+	for f in Filters:
+		filtersID.append(f.Id)
+
+	TransactionManager.Instance.EnsureInTransaction(doc)
+
+	for f in filtersID:
+		filtersNames.append(doc.GetElement(f).Name)
+		doc.Delete(f)
+
+	TransactionManager.Instance.TransactionTaskDone()
+	output = filtersNames
+	#Assign your output to the OUT variable.
+	OUT = output
+else:
+	pass</Script>
+    </PythonNodeModels.PythonNode>
+    <PythonNodeModels.PythonNode guid="d19f6f7b-c386-4a86-8427-0f8f2ac85023" type="PythonNodeModels.PythonNode" nickname="Получаем список шаблонов" x="1027.29032575908" y="-1230.89621243652" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>if IN[0] == True:
+	import clr
+	clr.AddReference('ProtoGeometry')
+	from Autodesk.DesignScript.Geometry import *
+	
+	clr.AddReference("System.Core")
+	import System.Linq
+	clr.ImportExtensions(System.Linq)
+	
+	clr.AddReference("RevitAPI")
+	import Autodesk.Revit
+	from Autodesk.Revit.Exceptions import InvalidOperationException
+	from Autodesk.Revit.DB import *
+	from Autodesk.Revit.DB import ElementId
+	from System.Collections.Generic import *
+	
+	# Import ToDSType(bool) extension method
+	clr.AddReference("RevitNodes")
+	import Revit
+	clr.ImportExtensions(Revit.Elements)
+	
+	# Import DocumentManager
+	clr.AddReference("RevitServices")
+	import RevitServices
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	from RevitServices.Persistence import DocumentManager
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	Filters = FilteredElementCollector(doc).OfClass(ParameterFilterElement).ToElements()
+	
+	#The inputs to this node will be stored as a list in the IN variables.
+	
+	filtersID = []
+	filtersNames = []
+	
+	for f in Filters:
+		filtersID.append(f.Id)
+
+	for f in filtersID:
+		filtersNames.append(doc.GetElement(f).Name)
+
+	OUT = filtersNames, filtersID
+else:
+	OUT = [[],[]]</Script>
+    </PythonNodeModels.PythonNode>
+    <PythonNodeModels.PythonNode guid="7ff7364f-1cc8-4028-b185-6ca83e53a39b" type="PythonNodeModels.PythonNode" nickname="Получаем список шаблонов" x="1032.40582342962" y="-848.067864727058" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
+      <PortInfo index="0" default="False" />
+      <Script>if IN[0] == True:
+	import clr
+	clr.AddReference('ProtoGeometry')
+	from Autodesk.DesignScript.Geometry import *
+	
+	clr.AddReference("System.Core")
+	import System.Linq
+	clr.ImportExtensions(System.Linq)
+	
+	clr.AddReference("RevitAPI")
+	import Autodesk.Revit
+	from Autodesk.Revit.Exceptions import InvalidOperationException
+	from Autodesk.Revit.DB import *
+	from Autodesk.Revit.DB import ElementId
+	from System.Collections.Generic import *
+	
+	# Import ToDSType(bool) extension method
+	clr.AddReference("RevitNodes")
+	import Revit
+	clr.ImportExtensions(Revit.Elements)
+	
+	# Import DocumentManager
+	clr.AddReference("RevitServices")
+	import RevitServices
+	from RevitServices.Persistence import DocumentManager
+	from RevitServices.Transactions import TransactionManager
+	from RevitServices.Persistence import DocumentManager
+	
+	doc = DocumentManager.Instance.CurrentDBDocument
+	
+	Filters = FilteredElementCollector(doc).OfClass(ParameterFilterElement).ToElements()
+	
+	#The inputs to this node will be stored as a list in the IN variables.
+	
+	filtersID = []
+	filtersNames = []
+	
+	for f in Filters:
+		filtersID.append(f.Id)
+
+	for f in filtersID:
+		filtersNames.append(doc.GetElement(f).Name)
+
+	OUT = filtersNames, filtersID
+else:
+	OUT = [[],[]]</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="cfaa5bc7-a9f8-45c4-a87f-21246d57306c" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1912.2697510942" y="-1799.16976001731" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;Удалить выбранные фильтры&quot;;&#xA;&quot;filters_to_del&quot;;" ShouldFocus="false" />
+    <CoreNodeModels.CreateList guid="a5ec64a9-1330-4a1f-8542-ef384a2baf57" type="CoreNodeModels.CreateList" nickname="List.Create" x="2044.93490588227" y="-1464.73961719039" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.CreateList>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="de0ac1ca-b798-43eb-a923-1efe74928053" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1888.63411849329" y="-1323.88788758031" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="list[0];&#xA;list[1];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="9525ecc5-04d9-4805-a617-4a81b7dd8910" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="DynoStudio.ShowDialog" x="2382.20868317598" y="-1789.87739087462" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="C:\Program Files\Prorubim Nodes\Prorubim Dyno\bin\DynoNodes.dll" function="Prorubim.DynoNodes.DynoStudio.ShowDialog@string[],string[],var[]..[],bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="0a905a0a-8faa-4394-8d0b-a4d414ca9deb" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="String.Contains" x="2870.9233661252" y="-1475.34976123793" isVisible="true" isUpstreamVisible="true" lacing="CrossProduct" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.String.Contains@string,string,bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="a107f1d1-1a00-4f5e-96ea-0596959cf7ed" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1868.51861567674" y="-961.014723996269" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="list[0];&#xA;list[1];" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="306203b8-1c0a-48a1-95c2-2fe30a20b4a5" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="AllFalse" x="3243.49393388778" y="-1472.41072603711" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="BuiltIn" function="AllFalse@var[]..[]">
+      <PortInfo index="0" default="False" useLevels="True" level="2" shouldKeepListStructure="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="a2193b19-a586-40bf-8e5f-1445b399c6de" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="String.Contains" x="2896.69011067783" y="-855.654828287979" isVisible="true" isUpstreamVisible="true" lacing="CrossProduct" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.String.Contains@string,string,bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="023cb632-163b-438e-98ce-35560340156f" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="AllFalse" x="3223.91599534226" y="-852.099672824299" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="BuiltIn" function="AllFalse@var[]..[]">
+      <PortInfo index="0" default="False" useLevels="True" level="2" shouldKeepListStructure="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <CoreNodeModels.CreateList guid="a4bd76fc-0ea6-4c40-8bb8-db1b5cf3719d" type="CoreNodeModels.CreateList" nickname="List.Create" x="2050.86888434417" y="-873.201929254309" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" inputcount="1">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.CreateList>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="1ac25621-d84e-4d7a-aac6-656d8bf79e56" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.FilterByBoolMask" x="3517.85218618191" y="-1305.44994635058" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.List.FilterByBoolMask@var[]..[],var[]..[]">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="04f51d41-bd5d-4e68-8278-dac9adb21903" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="List.FilterByBoolMask" x="3508.25257088318" y="-740.576574996469" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="DSCoreNodes.dll" function="DSCore.List.FilterByBoolMask@var[]..[],var[]..[]">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="e732842e-516f-4b29-a1af-9cb457a0f576" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="3857.18314130756" y="-1193.85702240822" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" CodeText="SELECTET;" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="5ac08be9-ccf1-4aae-8e6c-507fdb3ea3cc" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="3833.62818789756" y="-881.834846065699" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" CodeText="dontSELECTET;" ShouldFocus="false">
+      <PortInfo index="0" default="False" />
+    </Dynamo.Graph.Nodes.CodeBlockNodeModel>
+    <PythonNodeModels.PythonNode guid="a1980854-3275-4281-946b-90d58dbf5ca9" type="PythonNodeModels.PythonNode" nickname="Удалить по фильтру" x="4324.82626521358" y="-776.145962234139" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="3">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <Script>import clr
+clr.AddReference('RevitAPI')
+from Autodesk.Revit.DB import*
+clr.AddReference('RevitServices')
+from RevitServices.Persistence import DocumentManager
+from RevitServices.Transactions import TransactionManager
+doc = DocumentManager.Instance.CurrentDBDocument
+
+toDelete = []
+select = IN[1]
+notselect = IN[2]
+if len(select) &gt; 0:
+	toDelete = select
+elif len(notselect) &gt; 0:
+	toDelete = notselect
+else:
+	pass
+
+TransactionManager.Instance.EnsureInTransaction(doc)
+for e in toDelete:
+	doc.Delete(e)
+TransactionManager.Instance.TransactionTaskDone()
+
+OUT = '%d Template(s) deleted' %(len(toDelete))
+</Script>
+    </PythonNodeModels.PythonNode>
+    <Dynamo.Graph.Nodes.CodeBlockNodeModel guid="18b76641-58f1-4e3e-94c6-f83d87a95590" type="Dynamo.Graph.Nodes.CodeBlockNodeModel" nickname="Code Block" x="1848.48273796485" y="-514.288834493309" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false" CodeText="&quot;Сохранить выбранные фильтры&quot;;&#xA;&quot;filters_to_save&quot;;" ShouldFocus="false" />
+    <Dynamo.Graph.Nodes.ZeroTouch.DSFunction guid="378c9c2b-4fbe-48be-b5ef-dfaeae24a38a" type="Dynamo.Graph.Nodes.ZeroTouch.DSFunction" nickname="DynoStudio.ShowDialog" x="2288.54278754212" y="-521.186029266369" isVisible="true" isUpstreamVisible="true" lacing="Shortest" isSelectedInput="False" IsFrozen="false" isPinned="true" assembly="C:\Program Files\Prorubim Nodes\Prorubim Dyno\bin\DynoNodes.dll" function="Prorubim.DynoNodes.DynoStudio.ShowDialog@string[],string[],var[]..[],bool">
+      <PortInfo index="0" default="False" />
+      <PortInfo index="1" default="False" />
+      <PortInfo index="2" default="False" />
+      <PortInfo index="3" default="True" />
+    </Dynamo.Graph.Nodes.ZeroTouch.DSFunction>
+    <CoreNodeModels.Watch guid="182e5b9c-02eb-403d-8d2d-51d62d53f31d" type="CoreNodeModels.Watch" nickname="Количество удалённых шаблонов" x="4556.14223187033" y="-775.56409388973" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="false">
+      <PortInfo index="0" default="False" />
+    </CoreNodeModels.Watch>
+  </Elements>
+  <Connectors>
+    <Dynamo.Graph.Connectors.ConnectorModel start="3ca8e1ee-c2ae-45d2-bfb5-8225db3dbe15" start_index="0" end="96537a58-f6c0-4098-8dfb-ce471d6c1e86" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="3ca8e1ee-c2ae-45d2-bfb5-8225db3dbe15" start_index="1" end="96537a58-f6c0-4098-8dfb-ce471d6c1e86" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0ae286ce-8021-472a-bcd9-23e36e3c1f8c" start_index="0" end="4aea3a0d-9bee-463f-b6ed-eb134c85ea1a" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="96537a58-f6c0-4098-8dfb-ce471d6c1e86" start_index="0" end="45935989-efbe-470e-96d3-26b5fb4feb39" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="4aea3a0d-9bee-463f-b6ed-eb134c85ea1a" start_index="0" end="b2144731-d054-4a3d-a33c-32bad03f898a" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="4aea3a0d-9bee-463f-b6ed-eb134c85ea1a" start_index="0" end="45935989-efbe-470e-96d3-26b5fb4feb39" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="4aea3a0d-9bee-463f-b6ed-eb134c85ea1a" start_index="1" end="086a98ef-5875-4a80-bccf-b8c5954ed20f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b2144731-d054-4a3d-a33c-32bad03f898a" start_index="0" end="96537a58-f6c0-4098-8dfb-ce471d6c1e86" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="45935989-efbe-470e-96d3-26b5fb4feb39" start_index="0" end="25697d3e-7b95-4845-8c9e-dda5374959e7" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="25697d3e-7b95-4845-8c9e-dda5374959e7" start_index="0" end="086a98ef-5875-4a80-bccf-b8c5954ed20f" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="086a98ef-5875-4a80-bccf-b8c5954ed20f" start_index="1" end="e2bd49f1-6524-434e-a0f6-448af5d8835d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="e2bd49f1-6524-434e-a0f6-448af5d8835d" start_index="0" end="021b275a-4a7a-4a05-b237-c477a0a380c9" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="bfcab5b9-b9a6-4344-9845-5648a524c882" start_index="0" end="021b275a-4a7a-4a05-b237-c477a0a380c9" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="021b275a-4a7a-4a05-b237-c477a0a380c9" start_index="0" end="049b17c3-b513-4717-b202-5f8923f30e02" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0ce1c9b1-5975-4fa6-8c02-c2c822960b34" start_index="0" end="021b275a-4a7a-4a05-b237-c477a0a380c9" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0ce1c9b1-5975-4fa6-8c02-c2c822960b34" start_index="0" end="cd527508-d39a-4cb5-ba9d-99b189261c14" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0ce1c9b1-5975-4fa6-8c02-c2c822960b34" start_index="0" end="8469d74a-fb6a-470a-aea3-6c87383bb48f" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0ce1c9b1-5975-4fa6-8c02-c2c822960b34" start_index="0" end="a1980854-3275-4281-946b-90d58dbf5ca9" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="3a115959-2d84-459e-b191-622239c1da4a" start_index="0" end="58d2264f-ecb5-4cf1-ab7d-cfe15eaadaac" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="293dafd3-d58c-44dc-a01f-2a400ca9c518" start_index="0" end="58d2264f-ecb5-4cf1-ab7d-cfe15eaadaac" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="5ec56faa-0518-4160-b839-b1981cf21b1d" start_index="0" end="58d2264f-ecb5-4cf1-ab7d-cfe15eaadaac" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="46cbf384-bfe8-4d25-898c-5a03dc08afd3" start_index="0" end="57981d2e-1e01-4c47-b3fe-b51a7e4fc715" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="46cbf384-bfe8-4d25-898c-5a03dc08afd3" start_index="1" end="57981d2e-1e01-4c47-b3fe-b51a7e4fc715" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="57981d2e-1e01-4c47-b3fe-b51a7e4fc715" start_index="0" end="82de72ca-73a9-4d28-88e6-f07f5794cc18" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9d87fbeb-6b8d-45ca-9546-2432b60751a9" start_index="0" end="58d2264f-ecb5-4cf1-ab7d-cfe15eaadaac" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="03aa3304-94cc-486e-842b-ed208a82e4fb" start_index="0" end="bfcab5b9-b9a6-4344-9845-5648a524c882" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="82de72ca-73a9-4d28-88e6-f07f5794cc18" start_index="0" end="94e084d9-4e4e-4344-b969-d805fc4be2ac" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="94e084d9-4e4e-4344-b969-d805fc4be2ac" start_index="0" end="03aa3304-94cc-486e-842b-ed208a82e4fb" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="346274c3-b4d6-4ced-8943-6c4f97b80717" start_index="0" end="04231c95-b707-4577-a61b-d6c5a90cd469" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="04231c95-b707-4577-a61b-d6c5a90cd469" start_index="0" end="afc5ca50-3648-4461-acf2-ecb64f6aaa89" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="04231c95-b707-4577-a61b-d6c5a90cd469" start_index="0" end="82de72ca-73a9-4d28-88e6-f07f5794cc18" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="04231c95-b707-4577-a61b-d6c5a90cd469" start_index="1" end="03aa3304-94cc-486e-842b-ed208a82e4fb" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="afc5ca50-3648-4461-acf2-ecb64f6aaa89" start_index="0" end="57981d2e-1e01-4c47-b3fe-b51a7e4fc715" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="85339da8-29da-40c3-8f09-fc5cd5e2ffe4" start_index="0" end="cd527508-d39a-4cb5-ba9d-99b189261c14" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="ebf7e559-3e9b-444a-910f-316569faf2cb" start_index="0" end="8469d74a-fb6a-470a-aea3-6c87383bb48f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="58d2264f-ecb5-4cf1-ab7d-cfe15eaadaac" start_index="0" end="cd527508-d39a-4cb5-ba9d-99b189261c14" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" start_index="0" end="e6cf539c-e637-4463-b61c-d14530e45e7f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" start_index="1" end="f8492ae9-f34b-4839-a254-763d5bb9565f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" start_index="2" end="0ae286ce-8021-472a-bcd9-23e36e3c1f8c" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" start_index="2" end="96537a58-f6c0-4098-8dfb-ce471d6c1e86" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" start_index="3" end="346274c3-b4d6-4ced-8943-6c4f97b80717" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" start_index="3" end="57981d2e-1e01-4c47-b3fe-b51a7e4fc715" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="cd527508-d39a-4cb5-ba9d-99b189261c14" start_index="0" end="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0c25d82c-9fe9-4838-9734-564a5a09757e" start_index="0" end="cd527508-d39a-4cb5-ba9d-99b189261c14" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="129d7f3c-0e37-4019-b7b9-cfc8c6493b3d" start_index="0" end="c56a082e-092e-4248-a7c2-772f33b565d1" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0e1ce6c6-4043-4720-b850-bee9494a6fbb" start_index="0" end="c56a082e-092e-4248-a7c2-772f33b565d1" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="b1f739ae-26b3-40d9-b149-6f98599a9f85" start_index="0" end="8469d74a-fb6a-470a-aea3-6c87383bb48f" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="e76a4145-d4b5-417c-a88c-4d67e8e6da22" start_index="0" end="c56a082e-092e-4248-a7c2-772f33b565d1" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="c56a082e-092e-4248-a7c2-772f33b565d1" start_index="0" end="8469d74a-fb6a-470a-aea3-6c87383bb48f" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="5baade7a-00b4-4b4f-bd5e-5b053ef5677a" start_index="0" end="c56a082e-092e-4248-a7c2-772f33b565d1" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="8469d74a-fb6a-470a-aea3-6c87383bb48f" start_index="0" end="697870c7-cdf3-4c1d-8299-97b7f68f1188" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="697870c7-cdf3-4c1d-8299-97b7f68f1188" start_index="0" end="47e8d2c0-d8cc-418c-bdcd-7c45dd3d2bcc" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="697870c7-cdf3-4c1d-8299-97b7f68f1188" start_index="1" end="97712cf9-414c-4755-b9f6-f20c60f5d757" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="697870c7-cdf3-4c1d-8299-97b7f68f1188" start_index="2" end="d19f6f7b-c386-4a86-8427-0f8f2ac85023" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="697870c7-cdf3-4c1d-8299-97b7f68f1188" start_index="2" end="9525ecc5-04d9-4805-a617-4a81b7dd8910" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="697870c7-cdf3-4c1d-8299-97b7f68f1188" start_index="3" end="7ff7364f-1cc8-4028-b185-6ca83e53a39b" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="697870c7-cdf3-4c1d-8299-97b7f68f1188" start_index="3" end="378c9c2b-4fbe-48be-b5ef-dfaeae24a38a" end_index="3" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="d19f6f7b-c386-4a86-8427-0f8f2ac85023" start_index="0" end="de0ac1ca-b798-43eb-a923-1efe74928053" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="7ff7364f-1cc8-4028-b185-6ca83e53a39b" start_index="0" end="a107f1d1-1a00-4f5e-96ea-0596959cf7ed" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="cfaa5bc7-a9f8-45c4-a87f-21246d57306c" start_index="0" end="9525ecc5-04d9-4805-a617-4a81b7dd8910" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="cfaa5bc7-a9f8-45c4-a87f-21246d57306c" start_index="1" end="9525ecc5-04d9-4805-a617-4a81b7dd8910" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a5ec64a9-1330-4a1f-8542-ef384a2baf57" start_index="0" end="9525ecc5-04d9-4805-a617-4a81b7dd8910" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="de0ac1ca-b798-43eb-a923-1efe74928053" start_index="0" end="a5ec64a9-1330-4a1f-8542-ef384a2baf57" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="de0ac1ca-b798-43eb-a923-1efe74928053" start_index="0" end="0a905a0a-8faa-4394-8d0b-a4d414ca9deb" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="de0ac1ca-b798-43eb-a923-1efe74928053" start_index="1" end="1ac25621-d84e-4d7a-aac6-656d8bf79e56" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="9525ecc5-04d9-4805-a617-4a81b7dd8910" start_index="0" end="0a905a0a-8faa-4394-8d0b-a4d414ca9deb" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="0a905a0a-8faa-4394-8d0b-a4d414ca9deb" start_index="0" end="306203b8-1c0a-48a1-95c2-2fe30a20b4a5" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a107f1d1-1a00-4f5e-96ea-0596959cf7ed" start_index="0" end="a4bd76fc-0ea6-4c40-8bb8-db1b5cf3719d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a107f1d1-1a00-4f5e-96ea-0596959cf7ed" start_index="0" end="a2193b19-a586-40bf-8e5f-1445b399c6de" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a107f1d1-1a00-4f5e-96ea-0596959cf7ed" start_index="1" end="04f51d41-bd5d-4e68-8278-dac9adb21903" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="306203b8-1c0a-48a1-95c2-2fe30a20b4a5" start_index="0" end="1ac25621-d84e-4d7a-aac6-656d8bf79e56" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a2193b19-a586-40bf-8e5f-1445b399c6de" start_index="0" end="023cb632-163b-438e-98ce-35560340156f" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="023cb632-163b-438e-98ce-35560340156f" start_index="0" end="04f51d41-bd5d-4e68-8278-dac9adb21903" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a4bd76fc-0ea6-4c40-8bb8-db1b5cf3719d" start_index="0" end="378c9c2b-4fbe-48be-b5ef-dfaeae24a38a" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="1ac25621-d84e-4d7a-aac6-656d8bf79e56" start_index="1" end="e732842e-516f-4b29-a1af-9cb457a0f576" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="04f51d41-bd5d-4e68-8278-dac9adb21903" start_index="0" end="5ac08be9-ccf1-4aae-8e6c-507fdb3ea3cc" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="e732842e-516f-4b29-a1af-9cb457a0f576" start_index="0" end="a1980854-3275-4281-946b-90d58dbf5ca9" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="5ac08be9-ccf1-4aae-8e6c-507fdb3ea3cc" start_index="0" end="a1980854-3275-4281-946b-90d58dbf5ca9" end_index="2" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="a1980854-3275-4281-946b-90d58dbf5ca9" start_index="0" end="182e5b9c-02eb-403d-8d2d-51d62d53f31d" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="18b76641-58f1-4e3e-94c6-f83d87a95590" start_index="0" end="378c9c2b-4fbe-48be-b5ef-dfaeae24a38a" end_index="0" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="18b76641-58f1-4e3e-94c6-f83d87a95590" start_index="1" end="378c9c2b-4fbe-48be-b5ef-dfaeae24a38a" end_index="1" portType="0" />
+    <Dynamo.Graph.Connectors.ConnectorModel start="378c9c2b-4fbe-48be-b5ef-dfaeae24a38a" start_index="0" end="a2193b19-a586-40bf-8e5f-1445b399c6de" end_index="1" portType="0" />
+  </Connectors>
+  <Notes>
+    <Dynamo.Graph.Notes.NoteModel guid="54cc7b3e-f125-429f-965e-53ff7b69a5ae" text="НОДЫ РАБОТАЮЩИЕ С ДАННЫМИ" x="-1674.8451529712" y="-969.606352691799" />
+    <Dynamo.Graph.Notes.NoteModel guid="b7ca0c17-12ae-4e04-b8b8-8683fea08731" text="ИТОГОВАЯ КОНСОЛИДАЦИЯ ДАННЫХ" x="-1828.74826188337" y="-1300.91164695117" />
+    <Dynamo.Graph.Notes.NoteModel guid="95b65530-e367-41c7-8669-217488c39577" text="ВСЁ ОСТАЛЬНОЕ" x="-1485.74849501888" y="-1353.15090289748" />
+    <Dynamo.Graph.Notes.NoteModel guid="fe81c55c-18d1-451d-8b8f-b5398dbd6075" text="НОДЫ РАБОТАЮЩИЕ С ДАННЫМИ" x="-1677.88606098857" y="-1546.95959060185" />
+    <Dynamo.Graph.Notes.NoteModel guid="38379897-a0f2-4a31-8888-b9a09d9b2b27" text="ДОПОЛНИТЕЛЬНЫЕ. Градации серово по важности, темнее - важнее" x="-1893.44272572639" y="-711.796237534495" />
+    <Dynamo.Graph.Notes.NoteModel guid="766931c7-d234-49f2-be6c-ecedeec4c5e9" text="ИТОГОВАЯ КОНСОЛИДАЦИЯ ДАННЫХ" x="-2295.12262598246" y="-1303.47040814576" />
+    <Dynamo.Graph.Notes.NoteModel guid="8ffec78d-8753-4ab2-b59a-a444bfcffb31" text="ИСПОЛНИТЕЛЬНЫЕ НОДЫ " x="-2294.52440953249" y="-1545.84517642917" />
+    <Dynamo.Graph.Notes.NoteModel guid="530a5a0e-5d58-4944-af64-3f5a3707d927" text="ЗАПАСНЫЕ" x="-2292.24199810129" y="-720.679279880378" />
+    <Dynamo.Graph.Notes.NoteModel guid="20da6152-6161-4f5d-a60e-02f412207471" text="ИСПОЛНИТЕЛЬНЫЕ НОДЫ " x="-2291.48350151512" y="-968.491938519125" />
+    <Dynamo.Graph.Notes.NoteModel guid="174c4bfa-518c-48af-ad04-5ea2df8b24b2" text="ПЕРЕДАЁМ ИНФОРМАЦИЮ В РЕВИТ" x="-1395.84835454214" y="-1848.3700452257" />
+    <Dynamo.Graph.Notes.NoteModel guid="02fae2e3-9289-4ff2-8404-b949b00098d2" text="ПЕРЕДАЁМ ИНФОРМАЦИЮ В РЕВИТ" x="-1799.7175265666" y="-1837.58192976339" />
+    <Dynamo.Graph.Notes.NoteModel guid="d64f85d3-6900-4d7e-abd9-158da394b28d" text="ПРОВЕРОЧНЫЕ НОДЫ" x="-2284.24111931452" y="-1847.19860538795" />
+    <Dynamo.Graph.Notes.NoteModel guid="efea9d1c-3589-47f6-a74a-3eecfc07fbfb" text="ПРОВЕРОЧНЫЕ НОДЫ" x="-2064.17227179323" y="-1848.31301956062" />
+    <Dynamo.Graph.Notes.NoteModel guid="818f9b9f-287a-41bf-baca-1ec22a44ff27" text="ПЕРЕМЕННЫЕ ЗНАЧЕНИЯ" x="-2578.44079823468" y="-1794.86974810062" />
+    <Dynamo.Graph.Notes.NoteModel guid="99d8de1f-c8a1-46d5-ac17-c32736c8da16" text="ЭЛЕМЕНТЫ УПРАВЛЕНИЯ" x="-2799.4214148053" y="-1793.75533392795" />
+    <Dynamo.Graph.Notes.NoteModel guid="ad698b4d-2e38-42b9-855a-188b6c1e90d1" text="GUIDELINES" x="-1171.53282511981" y="-2100.85255921211" />
+    <Dynamo.Graph.Notes.NoteModel guid="ed690fd7-c0b2-481d-86de-e5841255ca2b" text="ПОЛУЧАЕМ ДАННЫЕ ИЗ РЕВИТ" x="-3081.96809183068" y="-1839.02911062007" />
+    <Dynamo.Graph.Notes.NoteModel guid="047235e8-fb8d-4ee8-8c36-2ee8ba12f6af" text="GUIDELINES" x="-3100.38888773971" y="-2099.3086087548" />
+    <Dynamo.Graph.Notes.NoteModel guid="9d16b81b-1be7-4968-84f5-10559e2e3835" text="ЭЛЕМЕНТЫ УПРАВЛЕНИЯ" x="-2793.20293582793" y="-1526.44707171539" />
+    <Dynamo.Graph.Notes.NoteModel guid="6f581c20-d86b-42be-80b9-cf6b75029c1c" text="ПЕРЕМЕННЫЕ ЗНАЧЕНИЯ" x="-2572.22231925731" y="-1527.56148588807" />
+    <Dynamo.Graph.Notes.NoteModel guid="0f52405b-e835-404a-ad6e-7ccf4566f10e" text="Dyno Studio" x="-2576.03523896713" y="-1218.18678386102" />
+    <Dynamo.Graph.Notes.NoteModel guid="915af89d-5f91-42f1-b0a6-bb0ea24bc1ee" text="Dyno Studio" x="-2797.01585553775" y="-1217.07236968834" />
+  </Notes>
+  <Annotations>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="006019bc-69c7-4c9c-8a4a-3c4a3c3546a1" annotationText="" left="1119.8000875337" top="502.167694391713" width="321" height="264.227096726555" fontSize="30" InitialTop="548.167694391713" InitialHeight="313.411829926409" TextblockHeight="36" backgrouund="#FF48B9FF">
+      <Models ModelGuid="e6cf539c-e637-4463-b61c-d14530e45e7f" />
+      <Models ModelGuid="f8492ae9-f34b-4839-a254-763d5bb9565f" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="68f32625-0f9f-4e2b-bb04-41220da76888" annotationText="DynoStudio.ShowDialog [Prorubim]" left="1820.98851540298" top="662.631981541505" width="739.93893208178" height="226.292369142683" fontSize="30" InitialTop="708.631981541505" InitialHeight="387.670734085701" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="3ca8e1ee-c2ae-45d2-bfb5-8225db3dbe15" />
+      <Models ModelGuid="96537a58-f6c0-4098-8dfb-ce471d6c1e86" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="54b3772b-93a1-41e0-ad69-1d63cb93c17f" annotationText="" left="1127.08467649461" top="906.87650972402" width="220.57428137333" height="347.70038054635" fontSize="30" InitialTop="952.87650972402" InitialHeight="149" TextblockHeight="36" backgrouund="#FFB9F9E1">
+      <Models ModelGuid="0ae286ce-8021-472a-bcd9-23e36e3c1f8c" />
+      <Models ModelGuid="346274c3-b4d6-4ced-8943-6c4f97b80717" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="bcc732db-2131-4615-9206-26b2bfbc0245" annotationText="" left="-397.291700345047" top="677.940310542949" width="1263.18526628194" height="380.589262529068" fontSize="30" InitialTop="723.940310542949" InitialHeight="841.772411894368" TextblockHeight="36" backgrouund="#FFFFB8D8">
+      <Models ModelGuid="3a115959-2d84-459e-b191-622239c1da4a" />
+      <Models ModelGuid="293dafd3-d58c-44dc-a01f-2a400ca9c518" />
+      <Models ModelGuid="5ec56faa-0518-4160-b839-b1981cf21b1d" />
+      <Models ModelGuid="9d87fbeb-6b8d-45ca-9546-2432b60751a9" />
+      <Models ModelGuid="58d2264f-ecb5-4cf1-ab7d-cfe15eaadaac" />
+      <Models ModelGuid="cd527508-d39a-4cb5-ba9d-99b189261c14" />
+      <Models ModelGuid="0c25d82c-9fe9-4838-9734-564a5a09757e" />
+      <Models ModelGuid="1058bf2b-38dc-4b62-8b1f-0ce83ca05bfd" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="5be0f813-b2cc-479a-832e-0da588032424" annotationText="" left="4233.54502952237" top="1684.02788639181" width="500.78429559762" height="192.62789293286" fontSize="30" InitialTop="1730.02788639181" InitialHeight="227" TextblockHeight="36" backgrouund="#FF48B9FF">
+      <Models ModelGuid="021b275a-4a7a-4a05-b237-c477a0a380c9" />
+      <Models ModelGuid="049b17c3-b513-4717-b202-5f8923f30e02" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="6a0f459c-d5d1-4529-bd1e-b3e862cdb4c6" annotationText="" left="3742.34695220634" top="1267.94471915059" width="256" height="451.02217634252" fontSize="30" InitialTop="1313.94471915059" InitialHeight="386.067313636433" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="e2bd49f1-6524-434e-a0f6-448af5d8835d" />
+      <Models ModelGuid="bfcab5b9-b9a6-4344-9845-5648a524c882" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="0454506f-8a57-41ef-8b37-440b989f28ab" annotationText="DynoStudio.ShowDialog [Prorubim]" left="1757.20150227363" top="1940.61571229244" width="710.06004957727" height="217" fontSize="30" InitialTop="1986.61571229244" InitialHeight="241.127264979109" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="46cbf384-bfe8-4d25-898c-5a03dc08afd3" />
+      <Models ModelGuid="57981d2e-1e01-4c47-b3fe-b51a7e4fc715" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="3b55d153-30f7-47b7-b771-e448c62c2f91" annotationText="&lt;Нажмите здесь, чтобы изменить заголовок группы&gt;" left="1777.23737998552" top="1500.78701756254" width="1830.73395520644" height="385.4381489998" fontSize="30" InitialTop="1546.78701756254" InitialHeight="369.438148999805" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="03aa3304-94cc-486e-842b-ed208a82e4fb" />
+      <Models ModelGuid="82de72ca-73a9-4d28-88e6-f07f5794cc18" />
+      <Models ModelGuid="94e084d9-4e4e-4344-b969-d805fc4be2ac" />
+      <Models ModelGuid="04231c95-b707-4577-a61b-d6c5a90cd469" />
+      <Models ModelGuid="afc5ca50-3648-4461-acf2-ecb64f6aaa89" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="6b3c3d96-5dad-442d-a045-01c3efeb4b00" annotationText="&lt;Нажмите здесь, чтобы изменить заголовок группы&gt;" left="1771.36025259081" top="986.45198032088" width="1846.21069789988" height="334.89981488735" fontSize="30" InitialTop="1032.45198032088" InitialHeight="318.89981488735" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="4aea3a0d-9bee-463f-b6ed-eb134c85ea1a" />
+      <Models ModelGuid="b2144731-d054-4a3d-a33c-32bad03f898a" />
+      <Models ModelGuid="45935989-efbe-470e-96d3-26b5fb4feb39" />
+      <Models ModelGuid="25697d3e-7b95-4845-8c9e-dda5374959e7" />
+      <Models ModelGuid="086a98ef-5875-4a80-bccf-b8c5954ed20f" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="8d5bfaca-1ee5-4f6c-9fc5-f9e4ecf1ff1c" annotationText="" left="-2258.00184109854" top="-200.308669967106" width="155.02122711667" height="193.241595684766" fontSize="30" InitialTop="-154.308669967106" InitialHeight="279.579291579427" TextblockHeight="36" backgrouund="#FFFF7BAC">
+      <Models ModelGuid="85339da8-29da-40c3-8f09-fc5cd5e2ffe4" />
+      <Models ModelGuid="ebf7e559-3e9b-444a-910f-316569faf2cb" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="803dc144-ce0a-42cb-b437-6c83ae33d82e" annotationText="" left="-416.668804748891" top="-1501.14313662868" width="1180.3584774394" height="375.40338984912" fontSize="30" InitialTop="-1455.14313662868" InitialHeight="359.403389849115" TextblockHeight="36" backgrouund="#FFFFB8D8">
+      <Models ModelGuid="129d7f3c-0e37-4019-b7b9-cfc8c6493b3d" />
+      <Models ModelGuid="0e1ce6c6-4043-4720-b850-bee9494a6fbb" />
+      <Models ModelGuid="b1f739ae-26b3-40d9-b149-6f98599a9f85" />
+      <Models ModelGuid="e76a4145-d4b5-417c-a88c-4d67e8e6da22" />
+      <Models ModelGuid="c56a082e-092e-4248-a7c2-772f33b565d1" />
+      <Models ModelGuid="5baade7a-00b4-4b4f-bd5e-5b053ef5677a" />
+      <Models ModelGuid="8469d74a-fb6a-470a-aea3-6c87383bb48f" />
+      <Models ModelGuid="697870c7-cdf3-4c1d-8299-97b7f68f1188" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="08c61202-7df7-4f08-9620-f1180e6f371e" annotationText="" left="959.584392940736" top="-1626.91974593195" width="355.85219299163" height="282.42236945251" fontSize="30" InitialTop="-1580.91974593195" InitialHeight="266.422369452514" TextblockHeight="36" backgrouund="#FF48B9FF">
+      <Models ModelGuid="97712cf9-414c-4755-b9f6-f20c60f5d757" />
+      <Models ModelGuid="47e8d2c0-d8cc-418c-bdcd-7c45dd3d2bcc" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="3f8b2c21-14e3-4eef-8e78-2fa44b8e14a7" annotationText="DynoStudio.ShowDialog [Prorubim]" left="1902.2697510942" top="-1845.16976001731" width="739.93893208178" height="226.29236914269" fontSize="30" InitialTop="-1799.16976001731" InitialHeight="210.292369142683" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="cfaa5bc7-a9f8-45c4-a87f-21246d57306c" />
+      <Models ModelGuid="9525ecc5-04d9-4805-a617-4a81b7dd8910" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="17f5388b-3505-4ca6-a1a7-95b0ba1eb195" annotationText="&lt;Нажмите здесь, чтобы изменить заголовок группы&gt;" left="1878.63411849329" top="-1521.34976123793" width="1820.21806768862" height="334.89981488735" fontSize="30" InitialTop="-1475.34976123793" InitialHeight="318.89981488735" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="de0ac1ca-b798-43eb-a923-1efe74928053" />
+      <Models ModelGuid="a5ec64a9-1330-4a1f-8542-ef384a2baf57" />
+      <Models ModelGuid="0a905a0a-8faa-4394-8d0b-a4d414ca9deb" />
+      <Models ModelGuid="306203b8-1c0a-48a1-95c2-2fe30a20b4a5" />
+      <Models ModelGuid="1ac25621-d84e-4d7a-aac6-656d8bf79e56" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="6ea731d8-e4cb-4471-a487-181a742bb25f" annotationText="&lt;Нажмите здесь, чтобы изменить заголовок группы&gt;" left="1858.51861567674" top="-1007.01472399627" width="1830.73395520644" height="385.4381489998" fontSize="30" InitialTop="-961.014723996269" InitialHeight="369.4381489998" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="04f51d41-bd5d-4e68-8278-dac9adb21903" />
+      <Models ModelGuid="a2193b19-a586-40bf-8e5f-1445b399c6de" />
+      <Models ModelGuid="023cb632-163b-438e-98ce-35560340156f" />
+      <Models ModelGuid="a107f1d1-1a00-4f5e-96ea-0596959cf7ed" />
+      <Models ModelGuid="a4bd76fc-0ea6-4c40-8bb8-db1b5cf3719d" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="bc79d0db-3ac6-4c1c-adfd-0b66963f9824" annotationText="" left="3823.62818789756" top="-1239.85702240822" width="256" height="451.022176342521" fontSize="30" InitialTop="-1193.85702240822" InitialHeight="435.02217634252" TextblockHeight="36" backgrouund="#FFC1D676">
+      <Models ModelGuid="e732842e-516f-4b29-a1af-9cb457a0f576" />
+      <Models ModelGuid="5ac08be9-ccf1-4aae-8e6c-507fdb3ea3cc" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="368b05d2-79cf-42fe-a556-6433850b5d4e" annotationText="" left="4314.82626521358" top="-822.145962234139" width="485.31596665675" height="191" fontSize="30" InitialTop="-776.145962234139" InitialHeight="175" TextblockHeight="36" backgrouund="#FF48B9FF">
+      <Models ModelGuid="a1980854-3275-4281-946b-90d58dbf5ca9" />
+      <Models ModelGuid="182e5b9c-02eb-403d-8d2d-51d62d53f31d" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="adbc321b-1183-467c-b200-ca51a05a4ff4" annotationText="DynoStudio.ShowDialog [Prorubim]" left="1838.48273796485" top="-567.186029266369" width="710.06004957727" height="217" fontSize="30" InitialTop="-521.186029266369" InitialHeight="201" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="18b76641-58f1-4e3e-94c6-f83d87a95590" />
+      <Models ModelGuid="378c9c2b-4fbe-48be-b5ef-dfaeae24a38a" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="18e36b54-e7f3-4148-93e7-179d0d36ae88" annotationText="" left="1017.29032575908" top="-1276.89621243652" width="221.11549767054" height="521.828347709462" fontSize="30" InitialTop="-1230.89621243652" InitialHeight="362.57568415674" TextblockHeight="36" backgrouund="#FFB9F9E1">
+      <Models ModelGuid="d19f6f7b-c386-4a86-8427-0f8f2ac85023" />
+      <Models ModelGuid="7ff7364f-1cc8-4028-b185-6ca83e53a39b" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="6582af14-2a51-4d40-960b-8e6f44bd2950" annotationText="" left="-2065.00328654373" top="-196.592095754444" width="157" height="114" fontSize="30" InitialTop="-150.592095754444" InitialHeight="246.771864463954" TextblockHeight="36" backgrouund="#FFBB87C6">
+      <Models ModelGuid="7265870e-3367-4994-bdd3-36f0dfb2f45b" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="7e795b51-1782-4ef7-9fc5-9a04f05a0cb9" annotationText="Название кустом ноды [НАЗВАНИЕ ПАКЕТА] для распакованных кустомных нодов" left="-2301.48350151512" top="-1152.6063526918" width="854.63834854392" height="228.114414172674" fontSize="48" InitialTop="-969.606352691799" InitialHeight="141.114414172674" TextblockHeight="173" backgrouund="#FFFFC999">
+      <Models ModelGuid="54cc7b3e-f125-429f-965e-53ff7b69a5ae" />
+      <Models ModelGuid="20da6152-6161-4f5d-a60e-02f412207471" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="a7f6b18b-79e5-4dab-b23e-792082d9ee46" annotationText="КЛЮЧЕВЫЕ МОМЕНТЫ РАБОТЫ" left="-2305.12262598246" top="-1371.47040814576" width="722.37436409909" height="114.55876119459" fontSize="48" InitialTop="-1303.47040814576" InitialHeight="142.558761194588" TextblockHeight="58" backgrouund="#FFFFAA45">
+      <Models ModelGuid="b7ca0c17-12ae-4e04-b8b8-8683fea08731" />
+      <Models ModelGuid="766931c7-d234-49f2-be6c-ecedeec4c5e9" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="5175101f-7125-4c02-bc29-d95ee638bfe1" annotationText="ИСПОЛНИТЕЛЬНЫЕ НОДЫ (фильтрование, подбор, списки и т.д.)" left="-2304.52440953249" top="-1671.95959060185" width="854.63834854392" height="170.11441417268" fontSize="48" InitialTop="-1546.95959060185" InitialHeight="141.114414172674" TextblockHeight="115" backgrouund="#FFC1D676">
+      <Models ModelGuid="fe81c55c-18d1-451d-8b8f-b5398dbd6075" />
+      <Models ModelGuid="8ffec78d-8753-4ab2-b59a-a444bfcffb31" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="fc7f26a5-482a-451a-b097-62f04e4152c7" annotationText="ЗАПАСНЫЕ ВАРИАНТЫ, ДОПОЛНИТЕЛЬНЫЕ ОПЦИИ" left="-2302.24199810129" top="-845.679279880378" width="668.7992723749" height="192.883042345883" fontSize="48" InitialTop="-720.679279880378" InitialHeight="148.883042345883" TextblockHeight="115" backgrouund="#FFB5B5B5">
+      <Models ModelGuid="38379897-a0f2-4a31-8888-b9a09d9b2b27" />
+      <Models ModelGuid="530a5a0e-5d58-4944-af64-3f5a3707d927" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="faf50bd8-5d9f-4df9-ad01-0dfced19dad0" annotationText="ПЕРЕДАЁМ ИНФОРМАЦИЮ В РЕВИТ" left="-1809.7175265666" top="-1973.3700452257" width="646.86917202446" height="179.78811546231" fontSize="48" InitialTop="-1848.3700452257" InitialHeight="150.788115462315" TextblockHeight="115" backgrouund="#FF48B9FF">
+      <Models ModelGuid="174c4bfa-518c-48af-ad04-5ea2df8b24b2" />
+      <Models ModelGuid="02fae2e3-9289-4ff2-8404-b949b00098d2" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="5b87ce33-2f4a-4162-8267-c572990a0879" annotationText="ПРОВЕРОЧНЫЕ НОДЫ" left="-2294.24111931452" top="-1973.31301956062" width="384.06884752129" height="170.11441417267" fontSize="48" InitialTop="-1848.31301956062" InitialHeight="141.114414172673" TextblockHeight="115" backgrouund="#FF71C6A8">
+      <Models ModelGuid="efea9d1c-3589-47f6-a74a-3eecfc07fbfb" />
+      <Models ModelGuid="d64f85d3-6900-4d7e-abd9-158da394b28d" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="a3f3ba95-4588-4407-8655-da05e280701b" annotationText="ЭЛЕМЕНТЫ УПРАВЛЕНИЯ&#xD;&#xA;1 УРОВЕНЬ" left="-2809.4214148053" top="-1977.86974810062" width="401.98061657062" height="228.11441417267" fontSize="48" InitialTop="-1794.86974810062" InitialHeight="141.114414172673" TextblockHeight="173" backgrouund="#FFFF7BAC">
+      <Models ModelGuid="818f9b9f-287a-41bf-baca-1ec22a44ff27" />
+      <Models ModelGuid="99d8de1f-c8a1-46d5-ac17-c32736c8da16" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="d6ecbbcf-23db-4640-980a-577604939e8e" annotationText="ПРИМЕЧАНИЯ ПО ЦВЕТОВОЙ ГРУППИРОВКЕ" left="-3110.38888773971" top="-2225.85255921211" width="2032.8560626199" height="170.54395045731" fontSize="96" InitialTop="-2100.85255921211" InitialHeight="141.543950457314" TextblockHeight="115" backgrouund="#FFFFAA45">
+      <Models ModelGuid="047235e8-fb8d-4ee8-8c36-2ee8ba12f6af" />
+      <Models ModelGuid="ad698b4d-2e38-42b9-855a-188b6c1e90d1" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="0499dcc5-1357-4850-8b4f-e732436869e5" annotationText="ПОЛУЧАЕМ ДАННЫЕ ИЗ РЕВИТ" left="-3091.96809183068" top="-1979.02911062007" width="214" height="184" fontSize="36" InitialTop="-1839.02911062007" InitialHeight="140" TextblockHeight="130" backgrouund="#FFB9F9E1">
+      <Models ModelGuid="ed690fd7-c0b2-481d-86de-e5841255ca2b" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="e2ae3e57-9d43-4afb-8b0d-ba629a9559cf" annotationText="ЭЛЕМЕНТЫ УПРАВЛЕНИЯ&#xD;&#xA;2 УРОВЕНЬ" left="-2803.20293582793" top="-1710.56148588807" width="401.98061657062" height="228.11441417268" fontSize="48" InitialTop="-1527.56148588807" InitialHeight="141.114414172673" TextblockHeight="173" backgrouund="#FFFFB8D8">
+      <Models ModelGuid="6f581c20-d86b-42be-80b9-cf6b75029c1c" />
+      <Models ModelGuid="9d16b81b-1be7-4968-84f5-10559e2e3835" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="adcc250a-0347-4ab9-bcb9-deda8f9c0dde" annotationText="[Prorubim]" left="2355.27889506974" top="96.2589681546" width="218" height="139" fontSize="30" InitialTop="142.2589681546" InitialHeight="123" TextblockHeight="36" backgrouund="#FFFFC999">
+      <Models ModelGuid="0ce1c9b1-5975-4fa6-8c02-c2c822960b34" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+    <Dynamo.Graph.Annotations.AnnotationModel guid="d1b643f7-66d7-42bb-b819-92adad3f0c19" annotationText="ЭЛЕМЕНТЫ УПРАВЛЕНИЯ&#xD;&#xA;Dyno Studio" left="-2807.01585553775" top="-1401.18678386102" width="325.98061657062" height="228.11441417268" fontSize="48" InitialTop="-1218.18678386102" InitialHeight="141.114414172673" TextblockHeight="173" backgrouund="#FFBB87C6">
+      <Models ModelGuid="0f52405b-e835-404a-ad6e-7ccf4566f10e" />
+      <Models ModelGuid="915af89d-5f91-42f1-b0a6-bb0ea24bc1ee" />
+    </Dynamo.Graph.Annotations.AnnotationModel>
+  </Annotations>
+  <Presets />
+  <Cameras>
+    <Camera Name="Фоновый просмотр" eyeX="-17" eyeY="24" eyeZ="50" lookX="12" lookY="-13" lookZ="-58" upX="0" upY="1" upZ="0" />
+  </Cameras>
+</Workspace>
