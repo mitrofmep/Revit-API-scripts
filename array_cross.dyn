@@ -1,9 +1,3 @@
-<Workspace Version="1.3.3.4651" X="-948.886964621403" Y="-1780.07665036722" zoom="0.859572917625646" ScaleFactor="1" Name="Home" Description="" RunType="Manual" RunPeriod="1000" HasRunWithoutCrash="True">
-  <NamespaceResolutionMap />
-  <Elements>
-    <PythonNodeModels.PythonNode guid="da621fed-e311-49b4-b205-709d3c54945f" type="PythonNodeModels.PythonNode" nickname="PyS Get Revit Selection" x="252.739270131403" y="1391.03279972367" isVisible="true" isUpstreamVisible="true" lacing="Disabled" isSelectedInput="False" IsFrozen="false" isPinned="true" inputcount="1">
-      <PortInfo index="0" default="False" />
-      <Script>import clr
 clr.AddReference('RevitServices')
 clr.AddReference('RevitAPI')
 from Autodesk.Revit.DB import *
