@@ -6,9 +6,6 @@
   "ElementResolver": {
     "ResolutionMap": {}
   },
-  "Inputs": {
-    Elem.select
-  },
   "Outputs": [],
   "Nodes": [
     {
