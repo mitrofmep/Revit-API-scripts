@@ -2,7 +2,7 @@
   "Uuid": "aafcf106-31c4-4ba1-99ce-431de13002ad",
   "IsCustomNode": false,
   "Description": null,
-  "Name": "BIM1_MapGlobalParameter",
+  "Name": "GP_MapGlobalParameter",
   "ElementResolver": {
     "ResolutionMap": {
       "Revit.Application": {
