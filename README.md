@@ -1,2 +1,2 @@
-# dynamo_scripts from Aris.
+# Some useful Dynamo scripts for Autodesk Revit
 HVAC, MEP, Electricity, FR.
