@@ -1,0 +1,87 @@
+import clr
+clr.AddReference('RevitAPI')
+clr.AddReference('RevitAPIUI')
+from Autodesk.Revit.DB import *
+from Autodesk.Revit.UI import *
+
+# Get the current document
+doc = __revit__.ActiveUIDocument.Document
+
+# Get the active view
+active_view = doc.ActiveView
+
+# Get all walls in the active view
+walls = FilteredElementCollector(doc, active_view.Id) \
+    .OfCategory(BuiltInCategory.OST_Walls) \
+    .WhereElementIsNotElementType() \
+    .ToElements()
+
+# Print the names of all walls
+for wall in walls:
+    wall_name = wall.Name
+    print(wall_name)
+
+# Create a new transaction
+transaction = Transaction(doc, "Example Transaction")
+transaction.Start()
+
+try:
+    # Create a new wall
+    wall_type = FilteredElementCollector(doc) \
+        .OfCategory(BuiltInCategory.OST_Walls) \
+        .WhereElementIsElementType() \
+        .FirstElement()
+
+    level = FilteredElementCollector(doc) \
+        .OfCategory(BuiltInCategory.OST_Levels) \
+        .WhereElementIsNotElementType() \
+        .FirstElement()
+
+    start_point = XYZ(0, 0, 0)
+    end_point = XYZ(10, 0, 0)
+
+    line = Line.CreateBound(start_point, end_point)
+
+    wall = Wall.Create(doc, line, level.Id, False)
+    wall.WallType = wall_type
+
+    # Modify the wall's parameters
+    wall.get_Parameter(BuiltInParameter.WALL_USER_HEIGHT_PARAM).Set(3000 / 304.8)
+    wall.get_Parameter(BuiltInParameter.WALL_BASE_OFFSET).Set(100 / 304.8)
+
+    # Add a door to the wall
+    door_family = FilteredElementCollector(doc) \
+        .OfCategory(BuiltInCategory.OST_Doors) \
+        .WhereElementIsElementType() \
+        .FirstElement()
+
+    door_level = FilteredElementCollector(doc) \
+        .OfCategory(BuiltInCategory.OST_Levels) \
+        .WhereElementIsNotElementType() \
+        .Skip(1) \
+        .FirstElement()
+
+    door_width = 900 / 304.8
+    door_height = 2100 / 304.8
+
+    door_placement_point = XYZ(500 / 304.8, 1000 / 304.8, 0)
+
+    door = doc.Create.NewFamilyInstance(door_placement_point, door_family, wall, door_level, StructuralType.NonStructural)
+
+    # Rotate the door
+    angle = 45
+    axis = Line.CreateBound(door_placement_point, door_placement_point + XYZ.BasisZ)
+    ElementTransformUtils.RotateElement(doc, door.Id, axis, angle)
+
+    # Commit the transaction
+    transaction.Commit()
+
+    # Show a success message
+    TaskDialog.Show("Script", "Script executed successfully!")
+
+except Exception as e:
+    # Rollback the transaction in case of an error
+    transaction.RollBack()
+
+    # Show an error message
+    TaskDialog.Show("Script Error", str(e))
