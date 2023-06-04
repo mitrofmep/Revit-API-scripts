@@ -22,7 +22,6 @@ namespace RevitScript
 
                 foreach (FamilyParameter parameter in familyParameters)
                 {
-                    // Change param here
                     if (parameter.Definition.Name == "Height")
                     {
                         using (Transaction trans = new Transaction(doc, "Modify Parameter"))
