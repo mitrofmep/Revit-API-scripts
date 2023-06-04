@@ -14,10 +14,10 @@ namespace RevitAPI_ColorByParameter
     public class ColorByParameterCommand : IExternalCommand
     {
         // Define the category filter dictionary
-        private Dictionary<string, bool> categoryFilterDict = new Dictionary<string, bool>();
+//         private Dictionary<string, bool> categoryFilterDict = new Dictionary<string, bool>();
 
         // Define the parameter name and color dictionary
-        private Dictionary<string, Color> parameterColorDict = new Dictionary<string, Color>();
+//         private Dictionary<string, Color> parameterColorDict = new Dictionary<string, Color>();
 
         public Result Execute(ExternalCommandData commandData, ref string message, ElementSet elements)
         {
@@ -197,81 +197,70 @@ namespace RevitAPI_ColorByParameter
         }
     }
 
-    public static class FilterHelper
-    {
-        public static ElementId GetFilterIdByName(Document doc, string filterName)
-        {
-            ElementId filterId = ElementId.InvalidElementId;
+//     public static class FilterHelper
+//     {
+//         public static ElementId GetFilterIdByName(Document doc, string filterName)
+//         {
+//             ElementId filterId = ElementId.InvalidElementId;
 
-            FilteredElementCollector collector = new FilteredElementCollector(doc);
-            collector.OfClass(typeof(ParameterFilterElement));
-            IEnumerable<ParameterFilterElement> filters = collector.Cast<ParameterFilterElement>();
+//             FilteredElementCollector collector = new FilteredElementCollector(doc);
+//             collector.OfClass(typeof(ParameterFilterElement));
+//             IEnumerable<ParameterFilterElement> filters = collector.Cast<ParameterFilterElement>();
 
-            foreach (ParameterFilterElement filter in filters)
-            {
-                if (filter.Name == filterName)
-                {
-                    filterId = filter.Id;
-                    break;
-                }
-            }
+//             foreach (ParameterFilterElement filter in filters)
+//             {
+//                 if (filter.Name == filterName)
+//                 {
+//                     filterId = filter.Id;
+//                     break;
+//                 }
+//             }
 
-            return filterId;
-        }
+//             return filterId;
+//         }
 
-        public static ParameterFilterElement CreateCategoryParameterFilter(Document doc, Category category, string parameterName, string filterName)
-        {
-            // Create a new filter rule to match the category and parameter
-            ElementId categoryId = category.Id;
-            ElementId parameterId = null;
+//         public static ParameterFilterElement CreateCategoryParameterFilter(Document doc, Category category, string parameterName, string filterName)
+//         {
+//             // Create a new filter rule to match the category and parameter
+//             ElementId categoryId = category.Id;
+//             ElementId parameterId = null;
 
-            // Get the parameter definition
-            FilterableValueProvider provider = new ParameterValueProvider(new ElementId(BuiltInParameter.INVALID));
-            FilterRule rule = new FilterStringRule(provider, new FilterStringEquals(), parameterName, false);
-            parameterId = new ElementId(rule.RuleFieldId);
+//             // Get the parameter definition
+//             FilterableValueProvider provider = new ParameterValueProvider(new ElementId(BuiltInParameter.INVALID));
+//             FilterRule rule = new FilterStringRule(provider, new FilterStringEquals(), parameterName, false);
+//             parameterId = new ElementId(rule.RuleFieldId);
 
-            // Create the filter element
-            ParameterFilterElement filter = ParameterFilterElement.Create(doc, filterName, new List<ElementId> { categoryId, parameterId }, new List<FilterRule> { rule });
+//             // Create the filter element
+//             ParameterFilterElement filter = ParameterFilterElement.Create(doc, filterName, new List<ElementId> { categoryId, parameterId }, new List<FilterRule> { rule });
 
-            return filter;
-        }
+//             return filter;
+//         }
 
-        public static void UpdateFilterColors(Document doc, ParameterFilterElement filter, Dictionary<string, Color> parameterColorDict)
-        {
-            // Get the filter's rules and update the color overrides
-            IList<ElementId> filterRuleIds = filter.GetRules();
-            ColorOverrides colorOverrides = filter.GetColorOverrides();
-            foreach (ElementId ruleId in filterRuleIds)
-            {
-                FilterRule rule = filter.GetRule(ruleId);
+//         public static void UpdateFilterColors(Document doc, ParameterFilterElement filter, Dictionary<string, Color> parameterColorDict)
+//         {
+//             IList<ElementId> filterRuleIds = filter.GetRules();
+//             ColorOverrides colorOverrides = filter.GetColorOverrides();
+//             foreach (ElementId ruleId in filterRuleIds)
+//             {
+//                 FilterRule rule = filter.GetRule(ruleId);
 
-                // Get the parameter name from the rule
-                ElementId parameterId = new ElementId(rule.RuleFieldId);
-                Parameter parameter = doc.GetElement(parameterId) as Parameter;
-                string parameterName = parameter.Definition.Name;
+//                 ElementId parameterId = new ElementId(rule.RuleFieldId);
+//                 Parameter parameter = doc.GetElement(parameterId) as Parameter;
+//                 string parameterName = parameter.Definition.Name;
 
-                // Get the color from the parameter color dictionary
-                if (parameterColorDict.TryGetValue(parameterName, out Color color))
-                {
-                    colorOverrides.SetColor(ruleId, color);
-                }
-            }
-            filter.SetColorOverrides(colorOverrides);
-        }
-    }
+//                 if (parameterColorDict.TryGetValue(parameterName, out Color color))
+//                 {
+//                     colorOverrides.SetColor(ruleId, color);
+//                 }
+//             }
+//             filter.SetColorOverrides(colorOverrides);
+//         }
+//     }
 
-    public class ColorByParameterForm : System.Windows.Forms.Form
-    {
-        // Define form controls and variables
-        // ...
-
-        public ColorByParameterForm(List<Category> categories, Dictionary<string, bool> categoryFilterDict, Dictionary<string, Color> parameterColorDict, List<Color> colorPalette)
-        {
-            // Initialize form controls and variables
-            // ...
-        }
-
-        // Event handlers for form controls
-        // ...
-    }
+//     public class ColorByParameterForm : System.Windows.Forms.Form
+//     {
+//         public ColorByParameterForm(List<Category> categories, Dictionary<string, bool> categoryFilterDict, Dictionary<string, Color> parameterColorDict, List<Color> colorPalette)
+//         {
+//         }
+//     }
 }
