@@ -13,12 +13,6 @@ namespace RevitScript
 
             View activeView = doc.ActiveView;
 
-            if (activeView.ViewType != ViewType.DrawingSheet)
-            {
-                TaskDialog.Show("Error", "Please select a sheet view.");
-                return Result.Cancelled;
-            }
-
             View newView = ViewDrafting.Create(doc, ElementId.InvalidElementId);
 
             newView.Name = "New View";
